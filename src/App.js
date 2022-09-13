@@ -1,12 +1,14 @@
 import React, { useState, useEffect } from 'react'
 import axios from 'axios'
+import './App.css'
+import Results from './components/Results'
 
 const App = () => {
   const key = 104417709088771
   let [combatant, setCombatant] = useState([])
   let [superHero, setSuperHero] = useState([])
   let [search, setSearch] = useState('')
-  let [results, setResults] = useState()
+  let [results, setResults] = useState([])
   let [player1, setPlayer1] =useState()
   let [player2, setPlayer2] =useState()
   let [show, setShow] =useState(false)
@@ -30,19 +32,31 @@ const App = () => {
     setSearch(event.target.value)
   }
 
-  const handleShow = () => {
-      setShow(true)
+  function handleShow() {
+    setShow(true)
   }
 
   const getSearch = () => {
     console.log('https://www.superheroapi.com/api/' + key + '/search/' + search)
     axios.get('https://www.superheroapi.com/api.php/' + key + '/search/' + search)
       .then(
-        (response) => setResults(response.data.results[0]),
+        (response) => setResults(response.data.results),
         (err) => console.error(err)
       )
       .catch((error) => console.error(error))
+    // await delay(10000)
+    // setShow(true)
   }
+
+  // async function getSearch() {
+  //   try {
+  //     setResults(response.data.results) = await
+  //   }
+  // }
+
+  const delay = ms => new Promise(
+    resolve => setTimeout(resolve, ms)
+  );
 
   //-----------------------------------------------
   //  UPDATE PLAYERS
@@ -83,25 +97,8 @@ const App = () => {
       <input type='text' placeholder='search...' onChange={handleSearchChange}/>
       <button onClick={getSearch}>Search</button>
       <button onClick={handleShow}>Show</button>
-      {show ?
-        <div className= 'searchCard'>
-          <h3>{results.name}</h3>
-          <img src={results.image.url} alt={results.name}/>
-          <h4>Stats: </h4>
-          <ul>
-            <li>Intellegence: {results.powerstats.intelligence}</li>
-            <li>Strength: {results.powerstats.strength}</li>
-            <li>Speed: {results.powerstats.speed}</li>
-            <li>Durability: {results.powerstats.durability}</li>
-            <li>Power: {results.powerstats.power}</li>
-            <li>Combat: {results.powerstats.combat}</li>
-          </ul>
-          <button onClick={updatePlayer1}>Add to player 1</button>
-          <button onClick={updatePlayer2}>Add to player 2</button>
-        </div>
-        :
-        <p></p> }
 
+      <Results results={results} updatePlayer1={updatePlayer1} updatePlayer2={updatePlayer2} show={show}/>
       {superHero.map((superheros) => {
         return(
           <div key={superheros.id}>
