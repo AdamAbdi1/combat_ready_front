@@ -55,6 +55,20 @@
   color: #fff;
 }
 
+.indicators {
+  display: flex;
+  justify-content: center;
+}
+
+.indicators > button {
+  margin: 5px;
+}
+
+.indicators > button.active {
+  background-color: green;
+  color: #fff;
+}
+
 .dropbtn {
   background-color: #04AA6D;
   color: white;
