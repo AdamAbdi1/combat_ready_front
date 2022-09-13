@@ -15,8 +15,6 @@ const App = () => {
   let [show, setShow] = useState(false)
 
 
-
-
   const getSuperHero = () => {
     axios.get('https://akabab.github.io/superhero-api/api/all.json')
       .then(
@@ -34,6 +32,10 @@ const App = () => {
   //-----------------------------------------------
   //  GET OUR DATA (MATCHES, COMBATS, COMPARISONS)
   //-----------------------------------------------
+//-----------------------------------------------
+//  GET OUR DATA (MATCHES)
+//-----------------------------------------------
+
   const getCombatant = () => {
     axios.get('http://localhost:8000/api/matches')
       .then(
@@ -42,9 +44,6 @@ const App = () => {
       )
       .catch((error) => console.error(error))
   }
-
-
-
 
   let truefalse = () => {
     if (hide === 'false') {
@@ -55,11 +54,9 @@ const App = () => {
     }
   }
 
-
-
-
-
-
+  //-----------------------------------------------
+  //  SEARCH
+  //-----------------------------------------------
 
   const handleSearchChange = (event) => {
     setSearch(event.target.value)
@@ -77,13 +74,48 @@ const App = () => {
         (err) => console.error(err)
       )
       .catch((error) => console.error(error))
-    console.log(results)
+  }
 
+  //-----------------------------------------------
+  //  UPDATE PLAYERS
+  //-----------------------------------------------
+
+  const updatePlayer1 = () => {
+    setPlayer1({
+      name: results.name,
+      intellegence: results.powerstats.intelligence,
+      strength: results.powerstats.strength,
+      speed: results.powerstats.speed,
+      durability: results.powerstats.durability,
+      power: results.powerstats.power,
+      combat: results.powerstats.combat,
+      image: results.image.url
+    })
+  }
+  const updatePlayer2 = () => {
+    setPlayer2({
+      name: results.name,
+      intellegence: results.powerstats.intelligence,
+      strength: results.powerstats.strength,
+      speed: results.powerstats.speed,
+      durability: results.powerstats.durability,
+      power: results.powerstats.power,
+      combat: results.powerstats.combat,
+      images: results.image.url
+    })
   }
 
   useEffect(() => {
     getCombatant()
   }, [])
+
+   //-----------------------------------------------
+  //  Sort Heros
+  //-----------------------------------------------
+  const handleSort = () => {
+    superHero.sort()
+  }
+
 
   return (
     <>
@@ -91,15 +123,33 @@ const App = () => {
         <button className="dropbtn">Dropdown</button>
         <div className="dropdown-content">
           <a href="#" onClick={truefalse}>List of Heros</a>
+          <a href='#' onClick={handleSort}>Sort Alphabetically</a>
         </div>
       </div>
       <h1>Search for Combatants</h1>
       <input type='text' placeholder='search...' onChange={handleSearchChange} />
       <button onClick={getSearch}>Search</button>
       <button onClick={handleShow}>Show</button>
-      {show ?  : <p></p>}
+      {show ?
+        <div className= 'searchCard'>
+          <h3>{results.name}</h3>
+          <img src={results.image.url} alt={results.name}/>
+          <h4>Stats: </h4>
+          <ul>
+            <li>Intellegence: {results.powerstats.intelligence}</li>
+            <li>Strength: {results.powerstats.strength}</li>
+            <li>Speed: {results.powerstats.speed}</li>
+            <li>Durability: {results.powerstats.durability}</li>
+            <li>Power: {results.powerstats.power}</li>
+            <li>Combat: {results.powerstats.combat}</li>
+          </ul>
+          <button onClick={updatePlayer1}>Add to player 1</button>
+          <button onClick={updatePlayer2}>Add to player 2</button>
+        </div>
+        :
+        <p></p> }
       {hide === 'false' ? <p hidden></p> : superHero.map((superheros) => {
-        return (
+        return(
           <div key={superheros.id}>
             <hr />
             <img src={superheros.images.sm} />
