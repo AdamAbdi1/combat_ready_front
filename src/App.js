@@ -11,7 +11,6 @@ const App = () => {
   let [results, setResults] = useState([])
   let [player1, setPlayer1] =useState()
   let [player2, setPlayer2] =useState()
-  let [show, setShow] =useState(false)
 
 
 //-----------------------------------------------
@@ -32,10 +31,6 @@ const App = () => {
     setSearch(event.target.value)
   }
 
-  function handleShow() {
-    setShow(true)
-  }
-
   const getSearch = () => {
     console.log('https://www.superheroapi.com/api/' + key + '/search/' + search)
     axios.get('https://www.superheroapi.com/api.php/' + key + '/search/' + search)
@@ -44,19 +39,8 @@ const App = () => {
         (err) => console.error(err)
       )
       .catch((error) => console.error(error))
-    // await delay(10000)
-    // setShow(true)
   }
 
-  // async function getSearch() {
-  //   try {
-  //     setResults(response.data.results) = await
-  //   }
-  // }
-
-  const delay = ms => new Promise(
-    resolve => setTimeout(resolve, ms)
-  );
 
   //-----------------------------------------------
   //  UPDATE PLAYERS
@@ -96,9 +80,8 @@ const App = () => {
       <h1>Search for Combatants</h1>
       <input type='text' placeholder='search...' onChange={handleSearchChange}/>
       <button onClick={getSearch}>Search</button>
-      <button onClick={handleShow}>Show</button>
 
-      <Results results={results} updatePlayer1={updatePlayer1} updatePlayer2={updatePlayer2} show={show}/>
+      <Results results={results} updatePlayer1={updatePlayer1} updatePlayer2={updatePlayer2} />
       {superHero.map((superheros) => {
         return(
           <div key={superheros.id}>

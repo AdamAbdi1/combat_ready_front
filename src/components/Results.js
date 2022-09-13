@@ -12,8 +12,8 @@ console.log(props.results)
       {props.results.map((result) => {
         return (
               <div className='resultCard' key={result.id}>
-                <h3>{result.name}</h3>
-                <p>AKA: {result.biography['full-name']}</p>
+                <h2>{result.name}</h2>
+                <p><b>Real Name: </b>{result.biography['full-name']}</p>
                 <h4>Stats: </h4>
                 <ul>
                   <li>Intellegence: {result.powerstats.intelligence}</li>
