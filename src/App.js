@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import axios from 'axios'
+import Carousel, { CarouselItem } from './component/Carousel'
+import './App.css'
 
 const App = () => {
 
@@ -7,7 +9,7 @@ const App = () => {
   let [superHero, setSuperHero] = useState([])
 
   const getCombatant = () => {
-    axios.get('http://localhost:8000/api/combatant')
+    axios.get('http://localhost:8000/api/matches')
       .then(
         (response) => setCombatant(response.data),
         (err) => console.error(err)
@@ -32,6 +34,7 @@ const App = () => {
     getSuperHero()
   }, [])
 
+
   return (
     <>
       <h1>list of superhero's</h1>
@@ -50,6 +53,13 @@ const App = () => {
           </div>
         )
       })}
+          <div className='App'>
+        <Carousel>
+          <CarouselItem>Item 1</CarouselItem>
+          <CarouselItem> Item 2</CarouselItem>
+          <CarouselItem>Item  3</CarouselItem>
+        </Carousel>
+      </div>
     </>
   )
 }
