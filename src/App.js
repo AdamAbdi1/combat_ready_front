@@ -48,6 +48,7 @@ const App = () => {
       .catch((error) => console.error(error))
   }
 
+  // hides the list of superheros
   let truefalse = () => {
     if (hide === 'false') {
       setHide('true')
@@ -118,13 +119,13 @@ const App = () => {
   const handleSort = () => {
     superHero.sort()
   }
-
+  // switches to the next 5 heros
   const handleNext = (e) => {
     e.preventDefault()
     setNext1(next1 += 5)
     setNext(next += 5)
   }
-
+  // switches to the previous 5 heros
   const handelPrevious = (e) => {
     e.preventDefault()
     if(next1 >= 5){
@@ -132,7 +133,7 @@ const App = () => {
       setNext(next -= 5)
     }
   }
-
+  // hides the searches show and shows the match
   const handleCompare = () => {
     if (compare === false) {
       setCompare(true)
