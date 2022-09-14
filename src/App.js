@@ -4,8 +4,9 @@ import axios from 'axios'
 import './App.css'
 import Results from './components/Results'
 import Compare from './components/compare';
+import Add from './components/add';
+import Edit from './components/edit';
 import './App.css'
-import Results from './components/Results'
 
 
 const App = () => {
@@ -56,6 +57,43 @@ const App = () => {
       )
       .catch((error) => console.error(error))
   }
+
+  //-----------------------------------------------
+//  ADD
+//-----------------------------------------------
+const handleCreate = (addCharacter) => {
+  axios
+    .post('http://localhost:8000/api/matches', addCharacter)
+    .then((response) => {
+      console.log(response)
+      getCombatant()
+    })
+}
+
+//-----------------------------------------------
+//  Delete
+//-----------------------------------------------
+const handleDelete = (event) => {
+  axios
+    .delete('http://localhost:8000/api/matches/' + event.target.value)
+    .then((response) => {
+      getCombatant()
+    })
+}
+
+
+//-----------------------------------------------
+//  Edit
+//-----------------------------------------------
+const handleUpdate = (editCharacter) => {
+  console.log(editCharacter)
+  axios
+    .put('http://localhost:8000/api/contacts/' + editCharacter.id, editCharacter)
+    .then((response) => {
+      getCombatant()
+    })
+}
+
 
   // hides the list of superheros
   let truefalse = () => {
@@ -164,9 +202,8 @@ const App = () => {
       <h1>Search for Combatants</h1>
       <input type='text' placeholder='search...' onChange={handleSearchChange} />
       <button onClick={getSearch}>Search</button>
-
-      <button onClick={handleShow}>Show</button>
       <button onClick={handleCompare}>compare</button>
+      {/* <Add handleCreate={handleCreate} /> */}
       {compare ?
        <div className='flex-container'>
         <div className='flex-child magenta'>
@@ -224,16 +261,16 @@ const App = () => {
       {hide === 'false' ? <p hidden></p> : superHero.slice(next1, next).map((superheros) => {
         return(
           <div key={superheros.id} className="flex-child">
-            <img src={superheros.images.sm} />
             <h4>Name: {superheros.name}</h4>
-            <h4>Power Stats</h4>
+            <img src={superheros.images.sm} />
+            <h4>Stats</h4>
             <ul>
-              <li>intelligence: {superheros.powerstats.intelligence}</li>
-              <li>strength: {superheros.powerstats.strength}</li>
-              <li>speed: {superheros.powerstats.speed}</li>
-              <li>durability: {superheros.powerstats.durability}</li>
-              <li>power: {superheros.powerstats.power}</li>
-              <li>combat: {superheros.powerstats.combat}</li>
+              <li>Intelligence: {superheros.powerstats.intelligence}</li>
+              <li>Strength: {superheros.powerstats.strength}</li>
+              <li>Speed: {superheros.powerstats.speed}</li>
+              <li>Durability: {superheros.powerstats.durability}</li>
+              <li>Power: {superheros.powerstats.power}</li>
+              <li>Combat: {superheros.powerstats.combat}</li>
             </ul>
           </div>
         )
