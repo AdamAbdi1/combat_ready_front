@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react'
 import axios from 'axios'
 import './App.css';
 import Compare from './components/compare';
+import './App.css'
+import Results from './components/Results'
 
 const App = () => {
   const key = 104417709088771
@@ -9,6 +11,7 @@ const App = () => {
   let [superHero, setSuperHero] = useState([])
   let [hide, setHide] = useState('false')
   let [search, setSearch] = useState('')
+
   let [results, setResults] = useState()
   let [player1, setPlayer1] = useState()
   let [player2, setPlayer2] = useState()
@@ -16,6 +19,8 @@ const App = () => {
   let [next, setNext] = useState(5)
   let [next1, setNext1] = useState(0)
   let [compare, setCompare] = useState(false)
+
+
 
 
   const getSuperHero = () => {
@@ -74,11 +79,12 @@ const App = () => {
     console.log('https://www.superheroapi.com/api/' + key + '/search/' + search)
     axios.get('https://www.superheroapi.com/api.php/' + key + '/search/' + search)
       .then(
-        (response) => setResults(response.data.results[0]),
+        (response) => setResults(response.data.results),
         (err) => console.error(err)
       )
       .catch((error) => console.error(error))
   }
+
 
   //-----------------------------------------------
   //  UPDATE PLAYERS
@@ -211,6 +217,7 @@ const App = () => {
         </div>
         :
         <p></p> }
+        <Results results={results} updatePlayer1={updatePlayer1} updatePlayer2={updatePlayer2} search={search}/>
       <div className="flex-container">
       {hide === 'false' ? <p hidden></p> : superHero.slice(next1, next).map((superheros) => {
         return(
