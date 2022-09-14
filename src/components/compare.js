@@ -5,15 +5,15 @@ const Compare = (props) => {
 
     return (
         <>
-        
-        <h1>{props.results.name}</h1>
+        <h1>hi</h1>
+        <h1>{props.player1.name}</h1>
             <h4>Power Stats</h4>
-            {/* <h6>intelligence: {props.results.powerstats}</h6>
-            <h6>strength: {props.results.powerstats.strength}</h6>
-            <h6>speed: {props.results.powerstats.speed}</h6>
-            <h6>durability: {props.results.powerstats.durability}</h6>
-            <h6>power: {props.results.powerstats.power}</h6>
-            <h6>combat: {props.results.powerstats.combat}</h6> */}
+            <h6>intelligence: {props.player1.powerstats.intelligence}</h6>
+            <h6>strength: {props.player1.powerstats.strength}</h6>
+            <h6>speed: {props.player1.powerstats.speed}</h6>
+            <h6>durability: {props.player1.powerstats.durability}</h6>
+            <h6>power: {props.player1.powerstats.power}</h6>
+            <h6>combat: {props.player1.powerstats.combat}</h6>
         </>
 
     )

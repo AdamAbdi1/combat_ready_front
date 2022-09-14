@@ -13,6 +13,9 @@ const App = () => {
   let [player1, setPlayer1] = useState()
   let [player2, setPlayer2] = useState()
   let [show, setShow] = useState(false)
+  let [next, setNext] = useState(5)
+  let [next1, setNext1] = useState(0)
+  let [compare, setCompare] = useState(false)
 
 
   const getSuperHero = () => {
@@ -116,11 +119,35 @@ const App = () => {
     superHero.sort()
   }
 
+  const handleNext = (e) => {
+    e.preventDefault()
+    setNext1(next1 += 5)
+    setNext(next += 5)
+  }
+
+  const handelPrevious = (e) => {
+    e.preventDefault()
+    if(next1 >= 5){
+      setNext1(next1 -= 5)
+      setNext(next -= 5)
+    }
+  }
+
+  const handleCompare = () => {
+    if (compare === false) {
+      setCompare(true)
+    }
+    if (compare === true) {
+      setCompare(false)
+    }
+    setShow(false)
+  }
+
 
   return (
     <>
       <div className="dropdown">
-        <button className="dropbtn">Dropdown</button>
+        <button className="dropbtn">Options</button>
         <div className="dropdown-content">
           <a href="#" onClick={truefalse}>List of Heros</a>
           <a href='#' onClick={handleSort}>Sort Alphabetically</a>
@@ -130,6 +157,41 @@ const App = () => {
       <input type='text' placeholder='search...' onChange={handleSearchChange} />
       <button onClick={getSearch}>Search</button>
       <button onClick={handleShow}>Show</button>
+      <button onClick={handleCompare}>compare</button>
+      {compare ?
+       <div className='flex-container'>
+        <div className='flex-child magenta'>
+       <img className='resize' src={player1.image} alt={player1.name}/>
+       <h3>{player1.name}</h3>
+       <h4>Stats: </h4>
+       <ul>
+         <li>Intellegence: {player1.intelligence}</li>
+         <li>Strength: {player1.strength}</li>
+         <li>Speed: {player1.speed}</li>
+         <li>Durability: {player1.durability}</li>
+         <li>Power: {player1.power}</li>
+         <li>Combat: {player1.combat}</li>
+       </ul>
+       </div>
+       <div className='flex-child green' id='black'>
+       <h1 className='center'>VS</h1>
+       </div>
+       <div className='flex-child magenta'>
+       <img className='resize' src={player2.images} alt={player2.name}/>
+       <h3>{player2.name}</h3>
+       <h4>Stats: </h4>
+       <ul>
+         <li>Intellegence: {player2.intelligence}</li>
+         <li>Strength: {player2.strength}</li>
+         <li>Speed: {player2.speed}</li>
+         <li>Durability: {player2.durability}</li>
+         <li>Power: {player2.power}</li>
+         <li>Combat: {player2.combat}</li>
+       </ul>
+       </div>
+     </div>
+       : 
+       <p></p>}
       {show ?
         <div className= 'searchCard'>
           <h3>{results.name}</h3>
@@ -148,10 +210,10 @@ const App = () => {
         </div>
         :
         <p></p> }
-      {hide === 'false' ? <p hidden></p> : superHero.map((superheros) => {
+      <div className="flex-container">
+      {hide === 'false' ? <p hidden></p> : superHero.slice(next1, next).map((superheros) => {
         return(
-          <div key={superheros.id}>
-            <hr />
+          <div key={superheros.id} className="flex-child">
             <img src={superheros.images.sm} />
             <h4>Name: {superheros.name}</h4>
             <h4>Power Stats</h4>
@@ -166,6 +228,12 @@ const App = () => {
           </div>
         )
       })}
+      </div>
+      {hide === 'false' ? <p></p>:<div><button onClick={handelPrevious}>Previous</button>
+      <div className='far-right'>
+      <button onClick={handleNext} type='button'>Next</button>
+      </div>
+      </div> }
     </>
   )
 }
