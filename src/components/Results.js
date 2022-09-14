@@ -4,8 +4,8 @@ import Result_card from './Result_card'
 
 const Results = (props) => {
   let [results, setResults] = useState(props.results)
-  let [player1, setPlayer1] = useState({})
-  let [player2, setPlayer2] = useState({})
+  // let [player1, setPlayer1] = useState({})
+  // let [player2, setPlayer2] = useState({})
 
   return (
       <>
@@ -15,7 +15,7 @@ const Results = (props) => {
         <div className='cardContainer'>
         {props.results.map((result) => {
           return (
-            <Result_card key={result.id} result={result} setPlayer1={setPlayer1} setPlayer2={setPlayer2}/>
+            <Result_card key={result.id} result={result} setPlayer1={props.setPlayer1} setPlayer2={props.setPlayer2}/>
 
             )
         })}

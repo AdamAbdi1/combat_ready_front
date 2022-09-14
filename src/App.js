@@ -19,8 +19,8 @@ const App = () => {
   let [hide, setHide] = useState('false')
   let [search, setSearch] = useState('')
   let [results, setResults] = useState([])
-  let [player1, setPlayer1] = useState()
-  let [player2, setPlayer2] = useState()
+  let [player1, setPlayer1] = useState({})
+  let [player2, setPlayer2] = useState({})
   let [show, setShow] = useState(false)
   let [next, setNext] = useState(5)
   let [next1, setNext1] = useState(0)
@@ -218,7 +218,7 @@ const App = () => {
         </div>
         :
         <p></p> }
-        <Results results={results} updatePlayer1={updatePlayer1} updatePlayer2={updatePlayer2} search={search}/>
+        <Results results={results} updatePlayer1={updatePlayer1} updatePlayer2={updatePlayer2} search={search} setPlayer1={setPlayer1} setPlayer2={setPlayer2} />
       <div className="flex-container">
       {hide === 'false' ? <p hidden></p> : superHero.slice(next1, next).map((superheros) => {
 
