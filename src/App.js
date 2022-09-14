@@ -222,9 +222,6 @@ const App = () => {
         <Results results={results} updatePlayer1={updatePlayer1} updatePlayer2={updatePlayer2} search={search}/>
       <div className="flex-container">
       {hide === 'false' ? <p hidden></p> : superHero.slice(next1, next).map((superheros) => {
-
-      <Results results={results} updatePlayer1={updatePlayer1} updatePlayer2={updatePlayer2} search={search}/>
-      {superHero.map((superheros) => {
         return(
           <div key={superheros.id} className="flex-child">
             <img src={superheros.images.sm} />
