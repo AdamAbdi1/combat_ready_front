@@ -18,9 +18,7 @@ const App = () => {
   let [superHero, setSuperHero] = useState([])
   let [hide, setHide] = useState('false')
   let [search, setSearch] = useState('')
-
-
-  let [results, setResults] = useState()
+  let [results, setResults] = useState([])
   let [player1, setPlayer1] = useState()
   let [player2, setPlayer2] = useState()
   let [show, setShow] = useState(false)
@@ -45,9 +43,6 @@ const App = () => {
   }, [])
 
 
-  //-----------------------------------------------
-  //  GET OUR DATA (MATCHES, COMBATS, COMPARISONS)
-  //-----------------------------------------------
 //-----------------------------------------------
 //  GET OUR DATA (MATCHES)
 //-----------------------------------------------
@@ -119,7 +114,7 @@ const App = () => {
       images: results.image.url
     })
   }
-  
+
 
   useEffect(() => {
     getCombatant()
@@ -168,7 +163,7 @@ const App = () => {
       </div>
       <h1>Search for Combatants</h1>
       <input type='text' placeholder='search...' onChange={handleSearchChange} />
-      <button onClick={getSearch}>Search</button>
+      <button onClick={() => getSearch()}>Search</button>
 
       <button onClick={handleCompare}>compare</button>
       {compare ?
