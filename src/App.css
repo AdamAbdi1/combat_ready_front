@@ -1,7 +1,24 @@
+
+ul {
+  list-style-type: none;
+}
+button {
+  margin: 1em;
+}
 .cardContainer {
   display: flex;
+  flex-wrap: wrap;
 }
 .resultCard {
   /* display: flex; */
   margin: 2em;
+}
+.cardBody {
+  display: flex;
+}
+.stats {
+  margin-left: 1em;
+}
+.cardImg {
+  width: 7em;
 }

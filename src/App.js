@@ -81,7 +81,7 @@ const App = () => {
       <input type='text' placeholder='search...' onChange={handleSearchChange}/>
       <button onClick={getSearch}>Search</button>
 
-      <Results results={results} updatePlayer1={updatePlayer1} updatePlayer2={updatePlayer2} />
+      <Results results={results} updatePlayer1={updatePlayer1} updatePlayer2={updatePlayer2} search={search}/>
       {superHero.map((superheros) => {
         return(
           <div key={superheros.id}>
