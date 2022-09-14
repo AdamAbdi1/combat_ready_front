@@ -1,9 +1,12 @@
 import React, { useState, useEffect } from 'react'
 import axios from 'axios'
-import './App.css';
+
+import './App.css'
+import Results from './components/Results'
 import Compare from './components/compare';
 import './App.css'
 import Results from './components/Results'
+
 
 const App = () => {
   const key = 104417709088771
@@ -11,6 +14,7 @@ const App = () => {
   let [superHero, setSuperHero] = useState([])
   let [hide, setHide] = useState('false')
   let [search, setSearch] = useState('')
+
 
   let [results, setResults] = useState()
   let [player1, setPlayer1] = useState()
@@ -71,9 +75,6 @@ const App = () => {
     setSearch(event.target.value)
   }
 
-  const handleShow = () => {
-    setShow(true)
-  }
 
   const getSearch = () => {
     console.log('https://www.superheroapi.com/api/' + key + '/search/' + search)
@@ -163,6 +164,7 @@ const App = () => {
       <h1>Search for Combatants</h1>
       <input type='text' placeholder='search...' onChange={handleSearchChange} />
       <button onClick={getSearch}>Search</button>
+
       <button onClick={handleShow}>Show</button>
       <button onClick={handleCompare}>compare</button>
       {compare ?
@@ -220,6 +222,9 @@ const App = () => {
         <Results results={results} updatePlayer1={updatePlayer1} updatePlayer2={updatePlayer2} search={search}/>
       <div className="flex-container">
       {hide === 'false' ? <p hidden></p> : superHero.slice(next1, next).map((superheros) => {
+
+      <Results results={results} updatePlayer1={updatePlayer1} updatePlayer2={updatePlayer2} search={search}/>
+      {superHero.map((superheros) => {
         return(
           <div key={superheros.id} className="flex-child">
             <img src={superheros.images.sm} />
