@@ -1,10 +1,15 @@
 import React, { useState, useEffect } from 'react'
 import axios from 'axios'
 
+
 import './App.css'
 import Results from './components/Results'
+
+import Carousel, { CarouselItem } from './component/Carousel'
+
+
 import Compare from './components/compare';
-import './App.css'
+
 
 
 const App = () => {
@@ -114,6 +119,7 @@ const App = () => {
       images: results.image.url
     })
   }
+  
 
   useEffect(() => {
     getCombatant()
@@ -237,12 +243,25 @@ const App = () => {
           </div>
         )
       })}
+
       </div>
       {hide === 'false' ? <p></p>:<div><button onClick={handelPrevious}>Previous</button>
       <div className='far-right'>
       <button onClick={handleNext} type='button'>Next</button>
       </div>
       </div> }
+
+          <div className='App'>
+        <Carousel>
+          <CarouselItem>
+          <img className='dangerroom' src='https://static.wikia.nocookie.net/marvelvscapcom/images/e/e8/Danger_Room_Cota.png/revision/latest/scale-to-width-down/768?cb=20170908085232'
+          />
+          </CarouselItem>
+          <CarouselItem> Item 2</CarouselItem>
+          <CarouselItem>Item  3</CarouselItem>
+        </Carousel>
+      </div>
+
     </>
   )
 }
