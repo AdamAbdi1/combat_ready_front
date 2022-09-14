@@ -23,7 +23,7 @@ button {
   width: 7em;
 }
 .dropbtn {
-  background-color: #04AA6D;
+  background-color: crimson;
   color: white;
   padding: 16px;
   font-size: 16px;
@@ -75,4 +75,35 @@ button {
 .down {
   transform: rotate(45deg);
   -webkit-transform: rotate(45deg);
+}
+
+.resize{
+  width:10em;
+  height:10em;
+}
+.flex-container {
+  display: flex;
+}
+
+.flex-child {
+  flex: 1;
+  border: 2px solid black;
+  margin-right: 20px;
+}  
+
+/* .flex-child:first-child {
+  margin-right: 20px;
+}  */
+.center{
+  text-align: center;
+  margin-top: 200px;
+}
+
+.far-right{
+  float: right;
+  margin: 5px;
+}
+
+#black{
+  border: 2px solid white;
 }
