@@ -5,7 +5,6 @@ import './App.css'
 import Results from './components/Results'
 import Compare from './components/compare';
 import './App.css'
-import Results from './components/Results'
 
 
 const App = () => {
@@ -165,7 +164,6 @@ const App = () => {
       <input type='text' placeholder='search...' onChange={handleSearchChange} />
       <button onClick={getSearch}>Search</button>
 
-      <button onClick={handleShow}>Show</button>
       <button onClick={handleCompare}>compare</button>
       {compare ?
        <div className='flex-container'>
@@ -199,7 +197,7 @@ const App = () => {
        </ul>
        </div>
      </div>
-       : 
+       :
        <p></p>}
       {show ?
         <div className= 'searchCard'>
@@ -223,8 +221,6 @@ const App = () => {
       <div className="flex-container">
       {hide === 'false' ? <p hidden></p> : superHero.slice(next1, next).map((superheros) => {
 
-      <Results results={results} updatePlayer1={updatePlayer1} updatePlayer2={updatePlayer2} search={search}/>
-      {superHero.map((superheros) => {
         return(
           <div key={superheros.id} className="flex-child">
             <img src={superheros.images.sm} />
