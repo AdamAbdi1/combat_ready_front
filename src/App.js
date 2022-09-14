@@ -105,6 +105,7 @@ const App = () => {
       images: results.image.url
     })
   }
+  
 
   useEffect(() => {
     getCombatant()
@@ -169,7 +170,10 @@ const App = () => {
       })}
           <div className='App'>
         <Carousel>
-          <CarouselItem>Item 1</CarouselItem>
+          <CarouselItem>
+          <img className='dangerroom' src='https://static.wikia.nocookie.net/marvelvscapcom/images/e/e8/Danger_Room_Cota.png/revision/latest/scale-to-width-down/768?cb=20170908085232'
+          />
+          </CarouselItem>
           <CarouselItem> Item 2</CarouselItem>
           <CarouselItem>Item  3</CarouselItem>
         </Carousel>
