@@ -88,7 +88,7 @@ const handleDelete = (event) => {
 const handleUpdate = (editCharacter) => {
   console.log(editCharacter)
   axios
-    .put('http://localhost:8000/api/contacts/' + editCharacter.id, editCharacter)
+    .put('http://localhost:8000/api/matches/' + editCharacter.id, editCharacter)
     .then((response) => {
       getCombatant()
     })
@@ -197,6 +197,7 @@ const handleUpdate = (editCharacter) => {
         <div className="dropdown-content">
           <a href="#" onClick={truefalse}>List of Heros</a>
           <a href='#' onClick={handleSort}>Sort Alphabetically</a>
+          <a href='#' onClick={handleSort}>Add superhero</a>
         </div>
       </div>
       <h1>Search for Combatants</h1>

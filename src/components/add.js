@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 
 
 const Add = (props) => {
-  let emptyCharacter = { name: '', species: '', intelligence: '', strength: '', speed: '', durability: '', power: '', image: ''}
+  let emptyCharacter = { name: '', intelligence: '', strength: '', speed: '', durability: '', power: '', combat: ''}
   const [Character, setCharacter] = useState(emptyCharacter)
 
   const handleChange = (event) => {
@@ -19,10 +19,6 @@ const Add = (props) => {
       <form onSubmit={handleSubmit}>
         <label htmlFor="name">Name: </label>
         <input type="text" name="name" value={Character.name} onChange={handleChange} />
-        <br />
-        <br />
-        <label htmlFor="species">species: </label>
-        <input type="text" name="species" value={Character.species} onChange={handleChange} /> 
         <br />
         <br />
         <label htmlFor="intelligence">intelligence: </label>
@@ -45,8 +41,8 @@ const Add = (props) => {
         <input type="number" name="power" value={Character.power} onChange={handleChange}/>
         <br />
         <br />
-        <label htmlFor="image">image: </label>
-        <input type="text" name="image" value={Character.image} onChange={handleChange} />
+        <label htmlFor="comabt">combat: </label>
+        <input type="text" name="combat" value={Character.combat} onChange={handleChange} /><br/>
         <input type="submit"/>
       </form>
     </>
