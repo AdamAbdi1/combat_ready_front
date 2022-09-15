@@ -258,7 +258,7 @@ const handleUpdate = (editCharacter) => {
         </div>
         :
         <p></p> }
-        <Results results={results} updatePlayer1={updatePlayer1} updatePlayer2={updatePlayer2} search={search}/>
+        <Results results={results} updatePlayer1={updatePlayer1} updatePlayer2={updatePlayer2} search={search} setPlayer1={setPlayer1} setPlayer2={setPlayer2} />
       <div className="flex-container">
       {hide === 'false' ? <p hidden></p> : superHero.slice(next1, next).map((superheros) => {
         return(
