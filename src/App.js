@@ -1,13 +1,17 @@
 import React, { useState, useEffect } from 'react'
 import axios from 'axios'
 
+
 import './App.css'
 import Results from './components/Results'
+
+import Carousel, { CarouselItem } from './component/Carousel'
+
+
 import Compare from './components/compare';
 import Add from './components/add';
 import Edit from './components/edit';
 import './App.css'
-
 
 const App = () => {
   const key = 104417709088771
@@ -15,17 +19,13 @@ const App = () => {
   let [superHero, setSuperHero] = useState([])
   let [hide, setHide] = useState('false')
   let [search, setSearch] = useState('')
-
-
-  let [results, setResults] = useState()
-  let [player1, setPlayer1] = useState()
-  let [player2, setPlayer2] = useState()
+  let [results, setResults] = useState([])
+  let [player1, setPlayer1] = useState({})
+  let [player2, setPlayer2] = useState({})
   let [show, setShow] = useState(false)
   let [next, setNext] = useState(5)
   let [next1, setNext1] = useState(0)
   let [compare, setCompare] = useState(false)
-
-
 
 
   const getSuperHero = () => {
@@ -42,9 +42,6 @@ const App = () => {
   }, [])
 
 
-  //-----------------------------------------------
-  //  GET OUR DATA (MATCHES, COMBATS, COMPARISONS)
-  //-----------------------------------------------
 //-----------------------------------------------
 //  GET OUR DATA (MATCHES)
 //-----------------------------------------------
@@ -132,27 +129,28 @@ const handleUpdate = (editCharacter) => {
   const updatePlayer1 = () => {
     setPlayer1({
       name: results.name,
-      intellegence: results.powerstats.intelligence,
-      strength: results.powerstats.strength,
-      speed: results.powerstats.speed,
-      durability: results.powerstats.durability,
-      power: results.powerstats.power,
-      combat: results.powerstats.combat,
-      image: results.image.url
+      intellegence: results[0].powerstats.intelligence,
+      strength: results[0].powerstats.strength,
+      speed: results[0].powerstats.speed,
+      durability: results[0].powerstats.durability,
+      power: results[0].powerstats.power,
+      combat: results[0].powerstats.combat,
+      image: results[0].image.url
     })
   }
   const updatePlayer2 = () => {
     setPlayer2({
       name: results.name,
-      intellegence: results.powerstats.intelligence,
-      strength: results.powerstats.strength,
-      speed: results.powerstats.speed,
-      durability: results.powerstats.durability,
-      power: results.powerstats.power,
-      combat: results.powerstats.combat,
-      images: results.image.url
+      intellegence: results[0].powerstats.intelligence,
+      strength: results[0].powerstats.strength,
+      speed: results[0].powerstats.speed,
+      durability: results[0].powerstats.durability,
+      power: results[0].powerstats.power,
+      combat: results[0].powerstats.combat,
+      image: results[0].image.url
     })
   }
+
 
   useEffect(() => {
     getCombatant()
@@ -203,6 +201,7 @@ const handleUpdate = (editCharacter) => {
       <h1>Search for Combatants</h1>
       <input type='text' placeholder='search...' onChange={handleSearchChange} />
       <button onClick={getSearch}>Search</button>
+      {/* <button onClick={() => getSearch()}>Search</button> */}
       <button onClick={handleCompare}>compare</button>
       {/* <Add handleCreate={handleCreate} /> */}
       {compare ?
@@ -237,8 +236,10 @@ const handleUpdate = (editCharacter) => {
        </ul>
        </div>
      </div>
-       : 
+       :
        <p></p>}
+       <button onClick={updatePlayer1}>Add to player 1</button>
+       <button onClick={updatePlayer2}>Add to player 2</button>
       {show ?
         <div className= 'searchCard'>
           <h3>{results.name}</h3>
@@ -276,12 +277,25 @@ const handleUpdate = (editCharacter) => {
           </div>
         )
       })}
+
       </div>
       {hide === 'false' ? <p></p>:<div><button onClick={handelPrevious}>Previous</button>
       <div className='far-right'>
       <button onClick={handleNext} type='button'>Next</button>
       </div>
       </div> }
+
+          {/* <div className='App'>
+        <Carousel>
+          <CarouselItem>
+          <img className='dangerroom' src='https://static.wikia.nocookie.net/marvelvscapcom/images/e/e8/Danger_Room_Cota.png/revision/latest/scale-to-width-down/768?cb=20170908085232'
+          />
+          </CarouselItem>
+          <CarouselItem> Item 2</CarouselItem>
+          <CarouselItem>Item  3</CarouselItem>
+        </Carousel>
+      </div> */}
+
     </>
   )
 }
