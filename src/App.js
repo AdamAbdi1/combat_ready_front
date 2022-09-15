@@ -175,8 +175,14 @@ const App = () => {
   //  Sort Heros
   //-----------------------------------------------
   const handleSort = () => {
-    superHero.sort()
+    setSuperHero([...superHero].sort((a, b) => b.id - a.id))
   }
+
+  const handleSortByStrength = () => {
+    console.log('hi')
+    setSuperHero([...superHero].sort((a, b) => b.powerstats.strength - a.powerstats.strength))
+  }
+
   // switches to the next 5 heros
   const handleNext = (e) => {
     e.preventDefault()
@@ -209,8 +215,8 @@ const App = () => {
         <button className="dropbtn">Options</button>
         <div className="dropdown-content">
           <a href="#" onClick={truefalse}>List of Heros</a>
-          <a href='#' onClick={handleSort}>Sort Alphabetically</a>
-          <a href='#' onClick={handleSort}>Add superhero</a>
+          <a href='#' onClick={handleSort}>Sort from z to a</a>
+          <a href='#' onClick={handleSortByStrength}>Strength high to low</a>
         </div>
       </div>
       <h1>Search for Combatants</h1>
