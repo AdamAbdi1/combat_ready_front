@@ -1,16 +1,9 @@
 import React, { useState, useEffect } from 'react'
 import axios from 'axios'
-
-
 import './App.css'
 import Results from './components/Results'
-
 import Carousel, { CarouselItem } from './component/Carousel'
-
-
 import Compare from './components/compare';
-
-
 
 const App = () => {
   const key = 104417709088771
@@ -26,9 +19,9 @@ const App = () => {
   let [next1, setNext1] = useState(0)
   let [compare, setCompare] = useState(false)
 
-
-
-
+  //-----------------------------------------------
+  //  GET DATA FOR LIST OF HEROS
+  //-----------------------------------------------
   const getSuperHero = () => {
     axios.get('https://akabab.github.io/superhero-api/api/all.json')
       .then(
@@ -42,11 +35,9 @@ const App = () => {
     getSuperHero()
   }, [])
 
-
 //-----------------------------------------------
 //  GET OUR DATA (MATCHES)
 //-----------------------------------------------
-
   const getCombatant = () => {
     axios.get('http://localhost:8000/api/matches')
       .then(
@@ -55,8 +46,9 @@ const App = () => {
       )
       .catch((error) => console.error(error))
   }
-
-  // hides the list of superheros
+  //-----------------------------------------------
+  //  HIDES LIST OF SUPERHEROS
+  //-----------------------------------------------
   let truefalse = () => {
     if (hide === 'false') {
       setHide('true')
@@ -67,13 +59,11 @@ const App = () => {
   }
 
   //-----------------------------------------------
-  //  SEARCH
+  //  SEARCH FUNCTIONS
   //-----------------------------------------------
-
   const handleSearchChange = (event) => {
     setSearch(event.target.value)
   }
-
 
   const getSearch = () => {
     console.log('https://www.superheroapi.com/api/' + key + '/search/' + search)
@@ -85,37 +75,6 @@ const App = () => {
       .catch((error) => console.error(error))
   }
 
-
-  //-----------------------------------------------
-  //  UPDATE PLAYERS
-  //-----------------------------------------------
-
-  const updatePlayer1 = () => {
-    setPlayer1({
-      name: results.name,
-      intellegence: results.powerstats.intelligence,
-      strength: results.powerstats.strength,
-      speed: results.powerstats.speed,
-      durability: results.powerstats.durability,
-      power: results.powerstats.power,
-      combat: results.powerstats.combat,
-      image: results.image.url
-    })
-  }
-  const updatePlayer2 = () => {
-    setPlayer2({
-      name: results.name,
-      intellegence: results.powerstats.intelligence,
-      strength: results.powerstats.strength,
-      speed: results.powerstats.speed,
-      durability: results.powerstats.durability,
-      power: results.powerstats.power,
-      combat: results.powerstats.combat,
-      images: results.image.url
-    })
-  }
-
-
   useEffect(() => {
     getCombatant()
   }, [])
@@ -126,13 +85,19 @@ const App = () => {
   const handleSort = () => {
     superHero.sort()
   }
-  // switches to the next 5 heros
+
+  //-----------------------------------------------
+  //  SWITCHES TO THE NEXT 5 HEROS
+  //-----------------------------------------------
   const handleNext = (e) => {
     e.preventDefault()
     setNext1(next1 += 5)
     setNext(next += 5)
   }
-  // switches to the previous 5 heros
+
+  //-----------------------------------------------
+  //  SWITCHES TO THE PREVIOUS 5 HEROS
+  //-----------------------------------------------
   const handelPrevious = (e) => {
     e.preventDefault()
     if(next1 >= 5){
@@ -140,7 +105,10 @@ const App = () => {
       setNext(next -= 5)
     }
   }
-  // hides the searches show and shows the match
+
+  //-----------------------------------------------
+  //  HIDES THE SEARCHES SHOW AND SHOWS THE MATCH
+  //-----------------------------------------------
   const handleCompare = () => {
     if (compare === false) {
       setCompare(true)
@@ -162,9 +130,10 @@ const App = () => {
         </div>
       </div>
       <h1>Search for Combatants</h1>
+      <form>
       <input type='text' placeholder='search...' onChange={handleSearchChange} />
       <button onClick={() => getSearch()}>Search</button>
-
+      </form>
       <button onClick={handleCompare}>compare</button>
       {compare ?
        <div className='flex-container'>
@@ -200,25 +169,8 @@ const App = () => {
      </div>
        :
        <p></p>}
-      {show ?
-        <div className= 'searchCard'>
-          <h3>{results.name}</h3>
-          <img src={results.image.url} alt={results.name}/>
-          <h4>Stats: </h4>
-          <ul>
-            <li>Intellegence: {results.powerstats.intelligence}</li>
-            <li>Strength: {results.powerstats.strength}</li>
-            <li>Speed: {results.powerstats.speed}</li>
-            <li>Durability: {results.powerstats.durability}</li>
-            <li>Power: {results.powerstats.power}</li>
-            <li>Combat: {results.powerstats.combat}</li>
-          </ul>
-          <button onClick={updatePlayer1}>Add to player 1</button>
-          <button onClick={updatePlayer2}>Add to player 2</button>
-        </div>
-        :
-        <p></p> }
-        <Results results={results} updatePlayer1={updatePlayer1} updatePlayer2={updatePlayer2} search={search} setPlayer1={setPlayer1} setPlayer2={setPlayer2} />
+
+        <Results results={results} search={search} setPlayer1={setPlayer1} setPlayer2={setPlayer2} />
       <div className="flex-container">
       {hide === 'false' ? <p hidden></p> : superHero.slice(next1, next).map((superheros) => {
 
