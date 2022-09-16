@@ -1,36 +1,31 @@
 import React, { useState, useEffect } from 'react'
 import axios from 'axios'
-
-
 import './App.css'
 import Results from './components/Results'
-
 import Carousel, { CarouselItem } from './component/Carousel'
-
-
 import Compare from './components/compare';
-
-
+import Matches from './components/Matches'
+import AddMatch from './components/AddMatch'
 
 const App = () => {
   const key = 104417709088771
-  let [combatant, setCombatant] = useState([])
+  let [matches, setMatches] = useState([])
+  let [newMatch, setNewMatch] = useState({})
   let [superHero, setSuperHero] = useState([])
   let [hide, setHide] = useState('false')
   let [search, setSearch] = useState('')
-
-
-  let [results, setResults] = useState()
-  let [player1, setPlayer1] = useState()
-  let [player2, setPlayer2] = useState()
+  let [results, setResults] = useState([])
+  let [matchName, setMatchName] = useState('')
+  let [player1, setPlayer1] = useState({})
+  let [player2, setPlayer2] = useState({})
   let [show, setShow] = useState(false)
   let [next, setNext] = useState(5)
   let [next1, setNext1] = useState(0)
   let [compare, setCompare] = useState(false)
 
-
-
-
+  //-----------------------------------------------
+  //  GET DATA FOR LIST OF HEROS
+  //-----------------------------------------------
   const getSuperHero = () => {
     axios.get('https://akabab.github.io/superhero-api/api/all.json')
       .then(
@@ -44,24 +39,33 @@ const App = () => {
     getSuperHero()
   }, [])
 
-
-  //-----------------------------------------------
-  //  GET OUR DATA (MATCHES, COMBATS, COMPARISONS)
-  //-----------------------------------------------
 //-----------------------------------------------
 //  GET OUR DATA (MATCHES)
 //-----------------------------------------------
-
-  const getCombatant = () => {
+  const getMatches = () => {
     axios.get('http://localhost:8000/api/matches')
       .then(
-        (response) => setCombatant(response.data),
+        (response) => setMatches(response.data),
         (err) => console.error(err)
       )
       .catch((error) => console.error(error))
   }
+  //-----------------------------------------------
+  //  ADD MATCH
+  //-----------------------------------------------
+  const addMatch = (newMatch) => {
+    console.log(newMatch)
+    axios.post('http://localhost:8000/api/matches', newMatch)
+      .then(
+        (response) => {
+          setMatches([...matches, response.data])
+        })
+  }
 
-  // hides the list of superheros
+
+  //-----------------------------------------------
+  //  HIDES LIST OF SUPERHEROS
+  //-----------------------------------------------
   let truefalse = () => {
     if (hide === 'false') {
       setHide('true')
@@ -72,16 +76,13 @@ const App = () => {
   }
 
   //-----------------------------------------------
-  //  SEARCH
+  //  SEARCH FUNCTIONS
   //-----------------------------------------------
-
   const handleSearchChange = (event) => {
     setSearch(event.target.value)
   }
 
-
-  const getSearch = () => {
-    console.log('https://www.superheroapi.com/api/' + key + '/search/' + search)
+  const getSearch = (event) => {
     axios.get('https://www.superheroapi.com/api.php/' + key + '/search/' + search)
       .then(
         (response) => setResults(response.data.results),
@@ -90,39 +91,8 @@ const App = () => {
       .catch((error) => console.error(error))
   }
 
-
-  //-----------------------------------------------
-  //  UPDATE PLAYERS
-  //-----------------------------------------------
-
-  const updatePlayer1 = () => {
-    setPlayer1({
-      name: results.name,
-      intellegence: results.powerstats.intelligence,
-      strength: results.powerstats.strength,
-      speed: results.powerstats.speed,
-      durability: results.powerstats.durability,
-      power: results.powerstats.power,
-      combat: results.powerstats.combat,
-      image: results.image.url
-    })
-  }
-  const updatePlayer2 = () => {
-    setPlayer2({
-      name: results.name,
-      intellegence: results.powerstats.intelligence,
-      strength: results.powerstats.strength,
-      speed: results.powerstats.speed,
-      durability: results.powerstats.durability,
-      power: results.powerstats.power,
-      combat: results.powerstats.combat,
-      images: results.image.url
-    })
-  }
-  
-
   useEffect(() => {
-    getCombatant()
+    getMatches()
   }, [])
 
    //-----------------------------------------------
@@ -131,13 +101,19 @@ const App = () => {
   const handleSort = () => {
     superHero.sort()
   }
-  // switches to the next 5 heros
+
+  //-----------------------------------------------
+  //  SWITCHES TO THE NEXT 5 HEROS
+  //-----------------------------------------------
   const handleNext = (e) => {
     e.preventDefault()
     setNext1(next1 += 5)
     setNext(next += 5)
   }
-  // switches to the previous 5 heros
+
+  //-----------------------------------------------
+  //  SWITCHES TO THE PREVIOUS 5 HEROS
+  //-----------------------------------------------
   const handelPrevious = (e) => {
     e.preventDefault()
     if(next1 >= 5){
@@ -145,7 +121,10 @@ const App = () => {
       setNext(next -= 5)
     }
   }
-  // hides the searches show and shows the match
+
+  //-----------------------------------------------
+  //  HIDES THE SEARCHES SHOW AND SHOWS THE MATCH
+  //-----------------------------------------------
   const handleCompare = () => {
     if (compare === false) {
       setCompare(true)
@@ -154,6 +133,42 @@ const App = () => {
       setCompare(false)
     }
     setShow(false)
+  }
+
+
+  const handleAddNewMatch = () => {
+    setNewMatch({
+      matchName: matchName,
+      nameP1:player1.name,
+      realNameP1:player1.realName,
+      speciesP1:player1.species,
+      intelligenceP1:player1.intellegence,
+      strengthP1:player1.strength,
+       speedP1:player1.speed,
+       durabilityP1:player1.durability,
+       powerP1:player1.power,
+       imageP1:player1.image,
+       nameP2:player2.name,
+       realNameP2:player2.realName,
+       speciesP2:player2.species,
+       intelligenceP2:player2.intellegence,
+       strengthP2:player2.strength,
+        speedP2:player2.speed,
+        durabilityP2:player2.durability,
+        powerP2:player2.power,
+        imageP2:player2.image
+    })
+    addMatch(newMatch)
+  }
+  const confirmNewMatch = (newMatch) => {
+    addMatch(newMatch)
+  }
+
+  //-----------------------------------------------
+  //  NAMES THE MATCH
+  //-----------------------------------------------
+  const handleMatchNameChange = (event) => {
+    setMatchName(event.target.value)
   }
 
 
@@ -166,64 +181,59 @@ const App = () => {
           <a href='#' onClick={handleSort}>Sort Alphabetically</a>
         </div>
       </div>
+      <div className="dropdown">
+        <button className="dropbtn">Matches</button>
+          <div className="dropdown-content">
+          <Matches matches={matches} />
+        </div>
+      </div>
       <h1>Search for Combatants</h1>
-      <input type='text' placeholder='search...' onChange={handleSearchChange} />
-      <button onClick={getSearch}>Search</button>
-
+      <form>
+        <input type='text' placeholder='search...' onChange={handleSearchChange} />
+        <button onClick={() => getSearch()}>Search</button>
+      </form>
       <button onClick={handleCompare}>compare</button>
       {compare ?
        <div className='flex-container'>
         <div className='flex-child magenta'>
        <img className='resize' src={player1.image} alt={player1.name}/>
        <h3>{player1.name}</h3>
+       <p><b>Real Name: </b>{player1.realName}</p>
+       <p><b>Species: </b>{player1.species}</p>
        <h4>Stats: </h4>
        <ul>
-         <li>Intellegence: {player1.intelligence}</li>
+         <li>Intellegence: {player1.intellegence}</li>
          <li>Strength: {player1.strength}</li>
          <li>Speed: {player1.speed}</li>
          <li>Durability: {player1.durability}</li>
          <li>Power: {player1.power}</li>
-         <li>Combat: {player1.combat}</li>
        </ul>
        </div>
        <div className='flex-child green' id='black'>
+       <input type='text' placeholder='search...' onChange={handleMatchNameChange} />
        <h1 className='center'>VS</h1>
+       <button onClick={() => handleAddNewMatch()} >Add Match</button>
+       <button onClick={() => confirmNewMatch(newMatch)} >Confirm</button>
        </div>
        <div className='flex-child magenta'>
-       <img className='resize' src={player2.images} alt={player2.name}/>
+       <img className='resize' src={player2.image} alt={player2.name}/>
        <h3>{player2.name}</h3>
+       <p><b>Real Name: </b>{player2.realName}</p>
+       <p><b>Species: </b>{player2.species}</p>
        <h4>Stats: </h4>
        <ul>
-         <li>Intellegence: {player2.intelligence}</li>
+         <li>Intellegence: {player2.intellegence}</li>
          <li>Strength: {player2.strength}</li>
          <li>Speed: {player2.speed}</li>
          <li>Durability: {player2.durability}</li>
          <li>Power: {player2.power}</li>
-         <li>Combat: {player2.combat}</li>
        </ul>
        </div>
      </div>
        :
        <p></p>}
-      {show ?
-        <div className= 'searchCard'>
-          <h3>{results.name}</h3>
-          <img src={results.image.url} alt={results.name}/>
-          <h4>Stats: </h4>
-          <ul>
-            <li>Intellegence: {results.powerstats.intelligence}</li>
-            <li>Strength: {results.powerstats.strength}</li>
-            <li>Speed: {results.powerstats.speed}</li>
-            <li>Durability: {results.powerstats.durability}</li>
-            <li>Power: {results.powerstats.power}</li>
-            <li>Combat: {results.powerstats.combat}</li>
-          </ul>
-          <button onClick={updatePlayer1}>Add to player 1</button>
-          <button onClick={updatePlayer2}>Add to player 2</button>
-        </div>
-        :
-        <p></p> }
-        <Results results={results} updatePlayer1={updatePlayer1} updatePlayer2={updatePlayer2} search={search}/>
+
+        <Results results={results} search={search} setPlayer1={setPlayer1} setPlayer2={setPlayer2} />
       <div className="flex-container">
       {hide === 'false' ? <p hidden></p> : superHero.slice(next1, next).map((superheros) => {
 
