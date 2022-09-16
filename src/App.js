@@ -10,6 +10,7 @@ import Edit from './components/edit';
 import Matches from './components/Matches'
 import AddMatch from './components/AddMatch'
 
+
 const App = () => {
   const key = 104417709088771
   let [matches, setMatches] = useState([])
@@ -48,11 +49,10 @@ const App = () => {
   }, [])
 
 
-  //-----------------------------------------------
-  //  GET OUR DATA (MATCHES)
-  //-----------------------------------------------
+//-----------------------------------------------
+//  GET OUR DATA (MATCHES)
+//-----------------------------------------------
   const getMatches = () => {
-
     axios.get('http://localhost:8000/api/matches')
       .then(
         (response) => setMatches(response.data),
@@ -71,7 +71,6 @@ const App = () => {
           setMatches([...matches, response.data])
         })
   }
-
 
 
   const getStages = () => {
@@ -122,6 +121,7 @@ const App = () => {
   }
 
 
+
   //-----------------------------------------------
   //  HIDES LIST OF SUPERHEROS
   //-----------------------------------------------
@@ -164,8 +164,6 @@ const App = () => {
       )
       .catch((error) => console.error(error))
   }
-
-
 
 
   useEffect(() => {
