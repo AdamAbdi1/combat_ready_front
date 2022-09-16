@@ -6,31 +6,34 @@ const Result_card = (props) => {
   //-----------------------------------------------
   //  UPDATE PLAYERS
   //-----------------------------------------------
-
   const updatePlayer1 = () => {
     props.setPlayer1({
       name: props.result.name,
-      intellegence: props.result.powerstats.intelligence,
-      strength: props.result.powerstats.strength,
-      speed: props.result.powerstats.speed,
-      durability: props.result.powerstats.durability,
-      power: props.result.powerstats.power,
-      combat: props.result.powerstats.combat,
+      realName: props.result.biography['full-name'],
+      species: props.result.appearance.race,
+      intellegence: Number(props.result.powerstats.intelligence),
+      strength: Number(props.result.powerstats.strength),
+      speed: Number(props.result.powerstats.speed),
+      durability: Number(props.result.powerstats.durability),
+      power: Number(props.result.powerstats.power),
       image: props.result.image.url
     })
   }
   const updatePlayer2 = () => {
     props.setPlayer2({
       name: props.result.name,
-      intellegence: props.result.powerstats.intelligence,
-      strength: props.result.powerstats.strength,
-      speed: props.result.powerstats.speed,
-      durability: props.result.powerstats.durability,
-      power: props.result.powerstats.power,
-      combat: props.result.powerstats.combat,
+      realName: props.result.biography['full-name'],
+      species: props.result.appearance.race,
+      intellegence: Number(props.result.powerstats.intelligence),
+      strength: Number(props.result.powerstats.strength),
+      speed: Number(props.result.powerstats.speed),
+      durability: Number(props.result.powerstats.durability),
+      power: Number(props.result.powerstats.power),
       image: props.result.image.url
     })
   }
+
+
   return (
     <>
     <div className='resultCard' key={props.result.id}>
@@ -50,19 +53,15 @@ const Result_card = (props) => {
             <li>Speed: {props.result.powerstats.speed}</li>
             <li>Durability: {props.result.powerstats.durability}</li>
             <li>Power: {props.result.powerstats.power}</li>
-            <li>Combat: {props.result.powerstats.combat}</li>
           </ul>
         </div>
       </div>
       <div className='cardButtons'>
         <button onClick={updatePlayer1}>Add to player 1</button>
         <button onClick={updatePlayer2}>Add to player 2</button>
-        </div>
-
+      </div>
     </div>
     </>
-
-
   )
 }
 
