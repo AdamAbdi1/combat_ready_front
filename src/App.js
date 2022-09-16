@@ -1,25 +1,24 @@
 import React, { useState, useEffect } from 'react'
 import axios from 'axios'
-
-
 import './App.css'
 import Results from './components/Results'
-
 import Carousel, { CarouselItem } from './component/Carousel'
-
-
 import Compare from './components/compare';
 import Add from './components/add';
 import Edit from './components/edit';
-import './App.css'
+import Matches from './components/Matches'
+import AddMatch from './components/AddMatch'
+
 
 const App = () => {
   const key = 104417709088771
-  let [combatant, setCombatant] = useState([])
+  let [matches, setMatches] = useState([])
+  let [newMatch, setNewMatch] = useState({})
   let [superHero, setSuperHero] = useState([])
   let [hide, setHide] = useState('false')
   let [search, setSearch] = useState('')
   let [results, setResults] = useState([])
+  let [matchName, setMatchName] = useState('')
   let [player1, setPlayer1] = useState({})
   let [player2, setPlayer2] = useState({})
   let [show, setShow] = useState(false)
@@ -29,6 +28,10 @@ const App = () => {
   let [stage, setStage] = useState([])
 
 
+
+  //-----------------------------------------------
+  //  GET DATA FOR LIST OF HEROS
+  //-----------------------------------------------
   const getSuperHero = () => {
     axios.get('https://akabab.github.io/superhero-api/api/all.json')
       .then(
@@ -43,18 +46,29 @@ const App = () => {
   }, [])
 
 
-  //-----------------------------------------------
-  //  GET OUR DATA (MATCHES)
-  //-----------------------------------------------
-
-  const getCombatant = () => {
+//-----------------------------------------------
+//  GET OUR DATA (MATCHES)
+//-----------------------------------------------
+  const getMatches = () => {
     axios.get('http://localhost:8000/api/matches')
       .then(
-        (response) => setCombatant(response.data),
+        (response) => setMatches(response.data),
         (err) => console.error(err)
       )
       .catch((error) => console.error(error))
   }
+  //-----------------------------------------------
+  //  ADD MATCH
+  //-----------------------------------------------
+  const addMatch = (newMatch) => {
+    console.log(newMatch)
+    axios.post('http://localhost:8000/api/matches', newMatch)
+      .then(
+        (response) => {
+          setMatches([...matches, response.data])
+        })
+  }
+
 
   const getStages = () => {
     axios.get('http://localhost:8000/api/Stage')
@@ -108,7 +122,10 @@ const App = () => {
   }
 
 
-  // hides the list of superheros
+
+  //-----------------------------------------------
+  //  HIDES LIST OF SUPERHEROS
+  //-----------------------------------------------
   let truefalse = () => {
     if (hide === 'false') {
       setHide('true')
@@ -134,16 +151,13 @@ const App = () => {
   }
 
   //-----------------------------------------------
-  //  SEARCH
+  //  SEARCH FUNCTIONS
   //-----------------------------------------------
-
   const handleSearchChange = (event) => {
     setSearch(event.target.value)
   }
 
-
-  const getSearch = () => {
-    console.log('https://www.superheroapi.com/api/' + key + '/search/' + search)
+  const getSearch = (event) => {
     axios.get('https://www.superheroapi.com/api.php/' + key + '/search/' + search)
       .then(
         (response) => setResults(response.data.results),
@@ -153,37 +167,10 @@ const App = () => {
   }
 
 
-  //-----------------------------------------------
-  //  UPDATE PLAYERS
-  //-----------------------------------------------
+  useEffect(() => {
+    getMatches()
+  }, [])
 
-  const updatePlayer1 = () => {
-    setPlayer1({
-      name: results.name,
-      intellegence: results.powerstats.intelligence,
-      strength: results.powerstats.strength,
-      speed: results.powerstats.speed,
-      durability: results.powerstats.durability,
-      power: results.powerstats.power,
-      combat: results.powerstats.combat,
-      image: results.image.url
-    })
-  }
-  const updatePlayer2 = () => {
-    setPlayer2({
-      name: results.name,
-      intellegence: results.powerstats.intelligence,
-      strength: results.powerstats.strength,
-      speed: results.powerstats.speed,
-      durability: results.powerstats.durability,
-      power: results.powerstats.power,
-      combat: results.powerstats.combat,
-      image: results.image.url
-    })
-  }
-
-
-  
 
   //-----------------------------------------------
   //  Sort Heros
@@ -197,13 +184,19 @@ const App = () => {
     setSuperHero([...superHero].sort((a, b) => b.powerstats.strength - a.powerstats.strength))
   }
 
-  // switches to the next 5 heros
+
+  //-----------------------------------------------
+  //  SWITCHES TO THE NEXT 5 HEROS
+  //-----------------------------------------------
   const handleNext = (e) => {
     e.preventDefault()
     setNext1(next1 += 5)
     setNext(next += 5)
   }
-  // switches to the previous 5 heros
+
+  //-----------------------------------------------
+  //  SWITCHES TO THE PREVIOUS 5 HEROS
+  //-----------------------------------------------
   const handelPrevious = (e) => {
     e.preventDefault()
     if (next1 >= 5) {
@@ -211,7 +204,10 @@ const App = () => {
       setNext(next -= 5)
     }
   }
-  // hides the searches show and shows the match
+
+  //-----------------------------------------------
+  //  HIDES THE SEARCHES SHOW AND SHOWS THE MATCH
+  //-----------------------------------------------
   const handleCompare = () => {
     if (compare === false) {
       setCompare(true)
@@ -220,6 +216,42 @@ const App = () => {
       setCompare(false)
     }
     setShow(false)
+  }
+
+
+  const handleAddNewMatch = () => {
+    setNewMatch({
+      matchName: matchName,
+      nameP1:player1.name,
+      realNameP1:player1.realName,
+      speciesP1:player1.species,
+      intelligenceP1:player1.intellegence,
+      strengthP1:player1.strength,
+       speedP1:player1.speed,
+       durabilityP1:player1.durability,
+       powerP1:player1.power,
+       imageP1:player1.image,
+       nameP2:player2.name,
+       realNameP2:player2.realName,
+       speciesP2:player2.species,
+       intelligenceP2:player2.intellegence,
+       strengthP2:player2.strength,
+        speedP2:player2.speed,
+        durabilityP2:player2.durability,
+        powerP2:player2.power,
+        imageP2:player2.image
+    })
+    addMatch(newMatch)
+  }
+  const confirmNewMatch = (newMatch) => {
+    addMatch(newMatch)
+  }
+
+  //-----------------------------------------------
+  //  NAMES THE MATCH
+  //-----------------------------------------------
+  const handleMatchNameChange = (event) => {
+    setMatchName(event.target.value)
   }
 
 
@@ -233,10 +265,18 @@ const App = () => {
           <a href='#' onClick={handleSortByStrength}>Strength high to low</a>
         </div>
       </div>
+      <div className="dropdown">
+        <button className="dropbtn">Matches</button>
+          <div className="dropdown-content">
+          <Matches matches={matches} />
+        </div>
+      </div>
       <h1>Search for Combatants</h1>
-      <input type='text' placeholder='search...' onChange={handleSearchChange} />
-      <button onClick={getSearch}>Search</button>
-      {/* <button onClick={() => getSearch()}>Search</button> */}
+
+      <form>
+        <input type='text' placeholder='search...' onChange={handleSearchChange} />
+        <button onClick={() => getSearch()}>Search</button>
+      </form>
       <button onClick={handleCompare}>compare</button>
       {/* <Add handleCreate={handleCreate} /> */}
       {compare ?
@@ -359,6 +399,46 @@ const App = () => {
           <button onClick={handleNext} type='button'>Next</button>
         </div>
       </div>}
+       <div className='flex-container'>
+        <div className='flex-child magenta'>
+       <img className='resize' src={player1.image} alt={player1.name}/>
+       <h3>{player1.name}</h3>
+       <p><b>Real Name: </b>{player1.realName}</p>
+       <p><b>Species: </b>{player1.species}</p>
+       <h4>Stats: </h4>
+       <ul>
+         <li>Intellegence: {player1.intellegence}</li>
+         <li>Strength: {player1.strength}</li>
+         <li>Speed: {player1.speed}</li>
+         <li>Durability: {player1.durability}</li>
+         <li>Power: {player1.power}</li>
+       </ul>
+       </div>
+       <div className='flex-child green' id='black'>
+       <input type='text' placeholder='search...' onChange={handleMatchNameChange} />
+       <h1 className='center'>VS</h1>
+       <button onClick={() => handleAddNewMatch()} >Add Match</button>
+       <button onClick={() => confirmNewMatch(newMatch)} >Confirm</button>
+       </div>
+       <div className='flex-child magenta'>
+       <img className='resize' src={player2.image} alt={player2.name}/>
+       <h3>{player2.name}</h3>
+       <p><b>Real Name: </b>{player2.realName}</p>
+       <p><b>Species: </b>{player2.species}</p>
+       <h4>Stats: </h4>
+       <ul>
+         <li>Intellegence: {player2.intellegence}</li>
+         <li>Strength: {player2.strength}</li>
+         <li>Speed: {player2.speed}</li>
+         <li>Durability: {player2.durability}</li>
+         <li>Power: {player2.power}</li>
+       </ul>
+       </div>
+     </div>
+       :
+       <p></p>}
+
+        <Results results={results} search={search} setPlayer1={setPlayer1} setPlayer2={setPlayer2} />
       <div className="flex-container">
         {hide === 'false' ? <p hidden></p> : superHero.slice(next1, next).map((superheros) => {
           return (
