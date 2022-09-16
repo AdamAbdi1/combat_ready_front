@@ -26,6 +26,7 @@ const App = () => {
   let [next, setNext] = useState(5)
   let [next1, setNext1] = useState(0)
   let [compare, setCompare] = useState(false)
+  let [stage, setStage] = useState([])
 
 
   const getSuperHero = () => {
@@ -54,6 +55,21 @@ const App = () => {
       )
       .catch((error) => console.error(error))
   }
+
+  const getStages = () => {
+    axios.get('http://localhost:8000/api/Stage')
+      .then(
+        (response) => setStage(response.data),
+        (err) => console.error(err)
+      )
+      .catch((error) => console.error(error))
+  }
+
+  useEffect(() => {
+    getCombatant()
+    getStages()
+  }, [])
+
 
   //-----------------------------------------------
   //  ADD
@@ -167,9 +183,7 @@ const App = () => {
   }
 
 
-  useEffect(() => {
-    getCombatant()
-  }, [])
+  
 
   //-----------------------------------------------
   //  Sort Heros
