@@ -11,11 +11,11 @@ const Result_card = (props) => {
       name: props.result.name,
       realName: props.result.biography['full-name'],
       species: props.result.appearance.race,
-      intellegence: props.result.powerstats.intelligence,
-      strength: props.result.powerstats.strength,
-      speed: props.result.powerstats.speed,
-      durability: props.result.powerstats.durability,
-      power: props.result.powerstats.power,
+      intellegence: Number(props.result.powerstats.intelligence),
+      strength: Number(props.result.powerstats.strength),
+      speed: Number(props.result.powerstats.speed),
+      durability: Number(props.result.powerstats.durability),
+      power: Number(props.result.powerstats.power),
       image: props.result.image.url
     })
   }
@@ -24,11 +24,11 @@ const Result_card = (props) => {
       name: props.result.name,
       realName: props.result.biography['full-name'],
       species: props.result.appearance.race,
-      intellegence: props.result.powerstats.intelligence,
-      strength: props.result.powerstats.strength,
-      speed: props.result.powerstats.speed,
-      durability: props.result.powerstats.durability,
-      power: props.result.powerstats.power,
+      intellegence: Number(props.result.powerstats.intelligence),
+      strength: Number(props.result.powerstats.strength),
+      speed: Number(props.result.powerstats.speed),
+      durability: Number(props.result.powerstats.durability),
+      power: Number(props.result.powerstats.power),
       image: props.result.image.url
     })
   }

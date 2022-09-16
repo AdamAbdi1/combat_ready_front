@@ -4,14 +4,18 @@ import './App.css'
 import Results from './components/Results'
 import Carousel, { CarouselItem } from './component/Carousel'
 import Compare from './components/compare';
+import Matches from './components/Matches'
+import AddMatch from './components/AddMatch'
 
 const App = () => {
   const key = 104417709088771
   let [matches, setMatches] = useState([])
+  let [newMatch, setNewMatch] = useState({})
   let [superHero, setSuperHero] = useState([])
   let [hide, setHide] = useState('false')
   let [search, setSearch] = useState('')
   let [results, setResults] = useState([])
+  let [matchName, setMatchName] = useState('')
   let [player1, setPlayer1] = useState({})
   let [player2, setPlayer2] = useState({})
   let [show, setShow] = useState(false)
@@ -46,6 +50,19 @@ const App = () => {
       )
       .catch((error) => console.error(error))
   }
+  //-----------------------------------------------
+  //  ADD MATCH
+  //-----------------------------------------------
+  const addMatch = (newMatch) => {
+    console.log(newMatch)
+    axios.post('http://localhost:8000/api/matches', newMatch)
+      .then(
+        (response) => {
+          setMatches([...matches, response.data])
+        })
+  }
+
+
   //-----------------------------------------------
   //  HIDES LIST OF SUPERHEROS
   //-----------------------------------------------
@@ -119,6 +136,42 @@ const App = () => {
   }
 
 
+  const handleAddNewMatch = () => {
+    setNewMatch({
+      matchName: matchName,
+      nameP1:player1.name,
+      realNameP1:player1.realName,
+      speciesP1:player1.species,
+      intelligenceP1:player1.intellegence,
+      strengthP1:player1.strength,
+       speedP1:player1.speed,
+       durabilityP1:player1.durability,
+       powerP1:player1.power,
+       imageP1:player1.image,
+       nameP2:player2.name,
+       realNameP2:player2.realName,
+       speciesP2:player2.species,
+       intelligenceP2:player2.intellegence,
+       strengthP2:player2.strength,
+        speedP2:player2.speed,
+        durabilityP2:player2.durability,
+        powerP2:player2.power,
+        imageP2:player2.image
+    })
+    addMatch(newMatch)
+  }
+  const confirmNewMatch = (newMatch) => {
+    addMatch(newMatch)
+  }
+
+  //-----------------------------------------------
+  //  NAMES THE MATCH
+  //-----------------------------------------------
+  const handleMatchNameChange = (event) => {
+    setMatchName(event.target.value)
+  }
+
+
   return (
     <>
       <div className="dropdown">
@@ -128,11 +181,17 @@ const App = () => {
           <a href='#' onClick={handleSort}>Sort Alphabetically</a>
         </div>
       </div>
+      <div className="dropdown">
+        <button className="dropbtn">Matches</button>
+          <div className="dropdown-content">
+          <Matches matches={matches} />
+        </div>
+      </div>
       <h1>Search for Combatants</h1>
-<form>
-      <input type='text' placeholder='search...' onChange={handleSearchChange} />
-      <button onClick={() => getSearch()}>Search</button>
-</form>
+      <form>
+        <input type='text' placeholder='search...' onChange={handleSearchChange} />
+        <button onClick={() => getSearch()}>Search</button>
+      </form>
       <button onClick={handleCompare}>compare</button>
       {compare ?
        <div className='flex-container'>
@@ -151,7 +210,10 @@ const App = () => {
        </ul>
        </div>
        <div className='flex-child green' id='black'>
+       <input type='text' placeholder='search...' onChange={handleMatchNameChange} />
        <h1 className='center'>VS</h1>
+       <button onClick={() => handleAddNewMatch()} >Add Match</button>
+       <button onClick={() => confirmNewMatch(newMatch)} >Confirm</button>
        </div>
        <div className='flex-child magenta'>
        <img className='resize' src={player2.image} alt={player2.name}/>
