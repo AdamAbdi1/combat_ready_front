@@ -158,7 +158,6 @@ const App = () => {
         powerP2:player2.power,
         imageP2:player2.image
     })
-    addMatch(newMatch)
   }
   const confirmNewMatch = (newMatch) => {
     addMatch(newMatch)
