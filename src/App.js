@@ -65,8 +65,7 @@ const App = () => {
     setSearch(event.target.value)
   }
 
-  const getSearch = () => {
-    console.log('https://www.superheroapi.com/api/' + key + '/search/' + search)
+  const getSearch = (event) => {
     axios.get('https://www.superheroapi.com/api.php/' + key + '/search/' + search)
       .then(
         (response) => setResults(response.data.results),
@@ -130,10 +129,10 @@ const App = () => {
         </div>
       </div>
       <h1>Search for Combatants</h1>
-      <form>
+<form>
       <input type='text' placeholder='search...' onChange={handleSearchChange} />
       <button onClick={() => getSearch()}>Search</button>
-      </form>
+</form>
       <button onClick={handleCompare}>compare</button>
       {compare ?
        <div className='flex-container'>
