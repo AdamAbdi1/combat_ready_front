@@ -7,7 +7,7 @@ import Compare from './components/compare';
 
 const App = () => {
   const key = 104417709088771
-  let [combatant, setCombatant] = useState([])
+  let [matches, setMatches] = useState([])
   let [superHero, setSuperHero] = useState([])
   let [hide, setHide] = useState('false')
   let [search, setSearch] = useState('')
@@ -38,10 +38,10 @@ const App = () => {
 //-----------------------------------------------
 //  GET OUR DATA (MATCHES)
 //-----------------------------------------------
-  const getCombatant = () => {
+  const getMatches = () => {
     axios.get('http://localhost:8000/api/matches')
       .then(
-        (response) => setCombatant(response.data),
+        (response) => setMatches(response.data),
         (err) => console.error(err)
       )
       .catch((error) => console.error(error))
@@ -75,7 +75,7 @@ const App = () => {
   }
 
   useEffect(() => {
-    getCombatant()
+    getMatches()
   }, [])
 
    //-----------------------------------------------
@@ -139,30 +139,32 @@ const App = () => {
         <div className='flex-child magenta'>
        <img className='resize' src={player1.image} alt={player1.name}/>
        <h3>{player1.name}</h3>
+       <p><b>Real Name: </b>{player1.realName}</p>
+       <p><b>Species: </b>{player1.species}</p>
        <h4>Stats: </h4>
        <ul>
-         <li>Intellegence: {player1.intelligence}</li>
+         <li>Intellegence: {player1.intellegence}</li>
          <li>Strength: {player1.strength}</li>
          <li>Speed: {player1.speed}</li>
          <li>Durability: {player1.durability}</li>
          <li>Power: {player1.power}</li>
-         <li>Combat: {player1.combat}</li>
        </ul>
        </div>
        <div className='flex-child green' id='black'>
        <h1 className='center'>VS</h1>
        </div>
        <div className='flex-child magenta'>
-       <img className='resize' src={player2.images} alt={player2.name}/>
+       <img className='resize' src={player2.image} alt={player2.name}/>
        <h3>{player2.name}</h3>
+       <p><b>Real Name: </b>{player2.realName}</p>
+       <p><b>Species: </b>{player2.species}</p>
        <h4>Stats: </h4>
        <ul>
-         <li>Intellegence: {player2.intelligence}</li>
+         <li>Intellegence: {player2.intellegence}</li>
          <li>Strength: {player2.strength}</li>
          <li>Speed: {player2.speed}</li>
          <li>Durability: {player2.durability}</li>
          <li>Power: {player2.power}</li>
-         <li>Combat: {player2.combat}</li>
        </ul>
        </div>
      </div>
