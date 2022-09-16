@@ -8,13 +8,14 @@ import Compare from './components/compare';
 import Add from './components/add';
 import Edit from './components/edit';
 import Matches from './components/Matches'
-import AddMatch from './components/AddMatch'
+import Match from './components/Match'
 
 
 const App = () => {
   const key = 104417709088771
   let [matches, setMatches] = useState([])
   let [newMatch, setNewMatch] = useState({})
+  let [selMatch, setSelMatch] = useState({})
   let [superHero, setSuperHero] = useState([])
   let [hide, setHide] = useState('false')
   let [search, setSearch] = useState('')
@@ -23,6 +24,7 @@ const App = () => {
   let [player1, setPlayer1] = useState({})
   let [player2, setPlayer2] = useState({})
   let [show, setShow] = useState(false)
+  let [showMatch, setShowMatch] = useState(false)
   let [next, setNext] = useState(5)
   let [next1, setNext1] = useState(0)
   let [compare, setCompare] = useState(false)
@@ -266,7 +268,7 @@ const App = () => {
       <div className="dropdown">
         <button className="dropbtn">Matches</button>
         <div className="dropdown-content">
-          <Matches matches={matches} />
+          <Matches matches={matches} setShowMatch={setShowMatch} setCompare={setCompare} setSelMatch={setSelMatch}/>
         </div>
       </div>
       <h1>Search for Combatants</h1>
@@ -274,6 +276,8 @@ const App = () => {
         <input type='text' placeholder='search...' onChange={handleSearchChange} />
         <button onClick={() => getSearch()}>Search</button>
       </form>
+      {showMatch ? <Match selMatch={selMatch}/> : <></>}
+
       <button onClick={handleCompare}>compare</button>
       {/* <Add handleCreate={handleCreate} /> */}
       {compare ?
@@ -323,7 +327,7 @@ const App = () => {
             </details>
           </div>
           <div className='flex-child' id='black'>
-            <input type='text' placeholder='search...' onChange={handleMatchNameChange} />
+            <input type='text' onChange={handleMatchNameChange} />
             <h1 className='center'>VS</h1>
             <button onClick={() => handleAddNewMatch()} >Add Match</button>
             <button onClick={() => confirmNewMatch(newMatch)} >Confirm</button>

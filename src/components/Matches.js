@@ -1,14 +1,21 @@
 import React, { useState } from 'react'
-import axios from 'axios'
+
 
 const Matches = (props) => {
 
+  const handleRenderMatch = (match) => {
+    props.setCompare(false)
+    props.setShowMatch(true)
+    props.setSelMatch(match)
+    console.log(match)
+
+  }
 
   return (
     <>
     {props.matches.map((match) => {
       return (
-        <p>{match.matchName}</p>
+        <a onClick={() => handleRenderMatch(match)}>{match.matchName}</a>
       )
     })}
     </>
