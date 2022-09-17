@@ -6,7 +6,7 @@ import './App.css'
 import Results from './components/Results'
 
 import Carousel, { CarouselItem } from './component/Carousel'
-// import image from './path/to/logo.jpg'
+import ImageSlider from './component/ImageSlider'
 
 
 import Compare from './components/compare';
@@ -157,6 +157,10 @@ const App = () => {
     setShow(false)
   }
 
+  function ImageSlider() {
+    return <ImageSlider/>
+  }
+
 
   return (
     <>
@@ -254,9 +258,9 @@ const App = () => {
 
           <div className='App'>
         <Carousel>
-          <CarouselItem> Item 1 </CarouselItem>
-          <CarouselItem> Item 2 </CarouselItem>
-          <CarouselItem> Item 3 </CarouselItem>
+          <CarouselItem/>
+          <CarouselItem/> 
+          <CarouselItem/>
         </Carousel>
       </div>
 
