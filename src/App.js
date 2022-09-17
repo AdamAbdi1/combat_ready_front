@@ -15,7 +15,28 @@ const App = () => {
   const key = 104417709088771
   let [matches, setMatches] = useState([])
   let [newMatch, setNewMatch] = useState({})
-  let [selMatch, setSelMatch] = useState({})
+  let [selMatch, setSelMatch] = useState({
+    matchName: '',
+    nameP1: '',
+    realNameP1: '',
+    speciesP1: '',
+    intellegenceP1: 0,
+    strengthP1: 0,
+    speedP1: 0,
+    durabilityP1: 0,
+    powerP1: 0,
+    imageP1: '',
+    nameP2: '',
+    realNameP2: '',
+    speciesP2: '',
+    intellegenceP2: 0,
+    strengthP2: 0,
+    speedP2: 0,
+    durabilityP2: 0,
+    powerP2: 0,
+    imageP2: ''
+
+  })
   let [superHero, setSuperHero] = useState([])
   let [hide, setHide] = useState('false')
   let [search, setSearch] = useState('')
@@ -276,7 +297,7 @@ const App = () => {
         <input type='text' placeholder='search...' onChange={handleSearchChange} />
         <button onClick={() => getSearch()}>Search</button>
       </form>
-      {showMatch ? <Match selMatch={selMatch}/> : <></>}
+      {showMatch ? <Match selMatch={selMatch} setShowMatch={setShowMatch}/> : <></>}
 
       <button onClick={handleCompare}>compare</button>
       {/* <Add handleCreate={handleCreate} /> */}

@@ -8,10 +8,13 @@ button {
 .cardContainer {
   display: flex;
   flex-wrap: wrap;
+
 }
 .resultCard {
+  padding: 2em;
   /* display: flex; */
   margin: 2em;
+  background-color: rgba(200,200,200,.6)
 }
 .cardBody {
   display: flex;
@@ -97,7 +100,7 @@ button {
 body{
   background-image: url('https://static.vecteezy.com/system/resources/previews/002/208/140/original/cartoon-comic-halftone-background-free-vector.jpg');
   background-repeat: no-repeat;
-  background-attachment: fixed;  
+  background-attachment: fixed;
   background-size: cover;
 }
 .arrow {
@@ -137,7 +140,7 @@ body{
   /* border: 2px solid black; */
   margin-right: 20px;
   /* background-color: beige; */
-}  
+}
 .magenta{
   border: 2px solid black;
   background-color: cornflowerblue;
