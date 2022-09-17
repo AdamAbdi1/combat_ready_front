@@ -3,6 +3,12 @@ import axios from 'axios'
 import './App.css'
 import Results from './components/Results'
 import Carousel, { CarouselItem } from './component/Carousel'
+
+
+import ImageSlider from './component/ImageSlider'
+
+
+
 import Compare from './components/compare';
 
 import Add from './components/add';
@@ -218,6 +224,10 @@ const App = () => {
     setShow(false)
   }
 
+  function ImageSlider() {
+    return <ImageSlider/>
+  }
+
 
   const handleAddNewMatch = () => {
     setNewMatch({
@@ -420,12 +430,9 @@ const App = () => {
       </div>
       {/* <div className='App'>
         <Carousel>
-          <CarouselItem>
-          <img className='dangerroom' src='https://static.wikia.nocookie.net/marvelvscapcom/images/e/e8/Danger_Room_Cota.png/revision/latest/scale-to-width-down/768?cb=20170908085232'
-          />
-          </CarouselItem>
-          <CarouselItem> Item 2</CarouselItem>
-          <CarouselItem>Item  3</CarouselItem>
+          <CarouselItem/>
+          <CarouselItem/> 
+          <CarouselItem/>
         </Carousel>
       </div> */}
 
