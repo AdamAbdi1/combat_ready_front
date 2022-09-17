@@ -49,9 +49,9 @@ const App = () => {
   }, [])
 
 
-//-----------------------------------------------
-//  GET OUR DATA (MATCHES)
-//-----------------------------------------------
+  //-----------------------------------------------
+  //  GET OUR DATA (MATCHES)
+  //-----------------------------------------------
   const getMatches = () => {
     axios.get('http://localhost:8000/api/matches')
       .then(
@@ -85,38 +85,40 @@ const App = () => {
 
 
   //-----------------------------------------------
-  //  ADD
+  //  ADD Stage
   //-----------------------------------------------
-  const handleCreate = (addCharacter) => {
-    axios
-      .post('http://localhost:8000/api/matches', addCharacter)
+  const handleCreate = (addImage) => {
+    let nextId = stage[stage.length - 1].id + 1
+    axios.post('http://localhost:8000/api/Stage', addImage)
       .then((response) => {
-        console.log(response)
-        getMatches()
+        addImage.id = nextId
+        setStage([...stage, response.data])
+        console.log(addImage)
       })
   }
 
   //-----------------------------------------------
-  //  Delete
+  //  Delete Stage
   //-----------------------------------------------
   const handleDelete = (event) => {
     axios
-      .delete('http://localhost:8000/api/matches/' + event.target.value)
+      .delete('http://localhost:8000/api/Stage/' + event.target.value)
       .then((response) => {
-        getMatches()
+        getStages()
       })
   }
 
 
   //-----------------------------------------------
-  //  Edit
+  //  Edit Stage
   //-----------------------------------------------
-  const handleUpdate = (editCharacter) => {
-    console.log(editCharacter)
-    axios
-      .put('http://localhost:8000/api/matches/' + editCharacter.id, editCharacter)
+  const handleUpdate = (editImage) => {
+    console.log(editImage);
+    axios.put('http://localhost:8000/api/Stage/' + editImage.id, editImage)
       .then((response) => {
-        getMatches()
+        setStage(stage.map((image) => {
+          return image.id !== editImage ? image : editImage
+        }))
       })
   }
 
@@ -275,7 +277,20 @@ const App = () => {
         <button onClick={() => getSearch()}>Search</button>
       </form>
       <button onClick={handleCompare}>compare</button>
-      {/* <Add handleCreate={handleCreate} /> */}
+      <Add handleCreate={handleCreate} />
+      <div className="people">
+        {stage.map((image) => {
+          return (
+            <div key={image.id}>
+              <h4>Name: {image.nameOfStage}</h4>
+              <Edit handleUpdate={handleUpdate} image={image} />
+              <button onClick={handleDelete} value={image.id}>
+                X
+              </button>
+            </div>
+          )
+        })}
+      </div>
       {compare ?
         <div className='flex-container'>
           <div className='flex-child magenta'>
