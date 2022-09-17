@@ -291,8 +291,8 @@ const App = () => {
   //-----------------------------------------------
   const handleMatchNameChange = (event) => {
     event.preventDefault()
-    setMatchName(event.target.value)
-    // setNewMatch({...newMatch, [event.target.matchName]:event.target.value })
+    // setMatchName(event.target.value)
+    setNewMatch({...newMatch, [event.target.matchName]:event.target.value })
   }
 
   return (

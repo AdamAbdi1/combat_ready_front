@@ -12,9 +12,9 @@ const Match = (props) => {
       <>
     <button onClick={() => props.setShowMatch(false)}>Close Match</button>
     <button onClick={() => setEdit(false)}>Cancel Edit</button>
-      <div className='mainContainer edit'>
+      <form className='mainContainer edit'>
       <h2>{props.selMatch.matchName}</h2>
-        <form className='cardContainer'>
+        <div className='cardContainer'>
           <div className='resultCard'>
             <div className='cardHead'>
               <h3>{props.selMatch.nameP1}</h3>
@@ -55,8 +55,8 @@ const Match = (props) => {
               </div>
             </div>
           </div>
-        </form>
-      </div>
+        </div>
+      </form>
       </>
       :
 <>
