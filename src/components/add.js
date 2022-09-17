@@ -2,17 +2,25 @@ import React, { useState, useEffect } from 'react'
 
 
 const Add = (props) => {
-  let emptyPerson = { name: '', age: '' }
-  const [person, setPerson] = useState(emptyPerson)
+  let emptyImage = { nameOfStage: '',}
+  const [image, setImage] = useState(emptyImage)
+
+  const handleChange = (event) => {
+    setImage({ ...image, [event.target.name]: event.target.value })
+  }
+  
+  const handleSubmit = (event) => {
+    event.preventDefault()
+    props.handleCreate(image)
+    setImage(emptyImage)
+  }
+  
   return (
     <>
-      <form>
-        <label htmlFor="name">Name: </label>
-        <input type="text" name="name" />
+      <form onSubmit={handleSubmit}>
+        <label htmlFor="nameOfStage">Name: </label>
+        <input type="text" name="nameOfStage" value={image.nameOfStage} onChange={handleChange} />
         <br />
-        <br />
-        <label htmlFor="age">Age: </label>
-        <input type="number" name="age" />
         <input type="submit"/>
       </form>
     </>
