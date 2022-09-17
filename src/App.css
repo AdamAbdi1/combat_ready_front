@@ -5,16 +5,24 @@ ul {
 button {
   margin: 1em;
 }
+
+.mainContainer {
+  display: flex;
+  flex-direction: column;
+  background-color: rgba(200,200,200,.6)
+}
 .cardContainer {
   display: flex;
   flex-wrap: wrap;
-
+}
+.edit {
+  background-color: rgba(255,0,0,.8);
 }
 .resultCard {
   padding: 2em;
   /* display: flex; */
   margin: 2em;
-  background-color: rgba(200,200,200,.6)
+  background-color: rgba(200,200,200,.6);
 }
 .cardBody {
   display: flex;

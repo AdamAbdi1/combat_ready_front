@@ -7,8 +7,6 @@ const Matches = (props) => {
     props.setCompare(false)
     props.setShowMatch(true)
     props.setSelMatch(match)
-    console.log(match)
-
   }
 
   return (

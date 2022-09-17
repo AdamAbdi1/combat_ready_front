@@ -13,9 +13,8 @@ import Match from './components/Match'
 
 const App = () => {
   const key = 104417709088771
-  let [matches, setMatches] = useState([])
-  let [newMatch, setNewMatch] = useState({})
-  let [selMatch, setSelMatch] = useState({
+  const [matches, setMatches] = useState([])
+  const [newMatch, setNewMatch] = useState({
     matchName: '',
     nameP1: '',
     realNameP1: '',
@@ -35,21 +34,41 @@ const App = () => {
     durabilityP2: 0,
     powerP2: 0,
     imageP2: ''
-
   })
-  let [superHero, setSuperHero] = useState([])
-  let [hide, setHide] = useState('false')
-  let [search, setSearch] = useState('')
-  let [results, setResults] = useState([])
-  let [matchName, setMatchName] = useState('')
-  let [player1, setPlayer1] = useState({})
-  let [player2, setPlayer2] = useState({})
-  let [show, setShow] = useState(false)
-  let [showMatch, setShowMatch] = useState(false)
+  const [selMatch, setSelMatch] = useState({
+    matchName: '',
+    nameP1: '',
+    realNameP1: '',
+    speciesP1: '',
+    intellegenceP1: 0,
+    strengthP1: 0,
+    speedP1: 0,
+    durabilityP1: 0,
+    powerP1: 0,
+    imageP1: '',
+    nameP2: '',
+    realNameP2: '',
+    speciesP2: '',
+    intellegenceP2: 0,
+    strengthP2: 0,
+    speedP2: 0,
+    durabilityP2: 0,
+    powerP2: 0,
+    imageP2: ''
+  })
+  const [superHero, setSuperHero] = useState([])
+  const [hide, setHide] = useState('false')
+  const [search, setSearch] = useState('')
+  const [results, setResults] = useState([])
+  const [matchName, setMatchName] = useState('')
+  const [player1, setPlayer1] = useState({})
+  const [player2, setPlayer2] = useState({})
+  const [show, setShow] = useState(false)
+  const [showMatch, setShowMatch] = useState(false)
   let [next, setNext] = useState(5)
-  let [next1, setNext1] = useState(0)
-  let [compare, setCompare] = useState(false)
-  let [stage, setStage] = useState([])
+  const [next1, setNext1] = useState(0)
+  const [compare, setCompare] = useState(false)
+  const [stage, setStage] = useState([])
 
 
 
@@ -262,7 +281,6 @@ const App = () => {
       powerP2: player2.power,
       imageP2: player2.image
     })
-    confirmNewMatch(newMatch)
   }
   const confirmNewMatch = (newMatch) => {
     addMatch(newMatch)
@@ -272,9 +290,10 @@ const App = () => {
   //  NAMES THE MATCH
   //-----------------------------------------------
   const handleMatchNameChange = (event) => {
+    event.preventDefault()
     setMatchName(event.target.value)
+    // setNewMatch({...newMatch, [event.target.matchName]:event.target.value })
   }
-
 
   return (
     <>
@@ -308,7 +327,7 @@ const App = () => {
             <h3>Name: {player1.name}</h3>
             <h4>Stats: </h4>
             <ul>
-              <li>Intellegence: {player1.intelligence}</li>
+              <li>Intelligence: {player1.intellegence}</li>
               <li>Strength: {player1.strength}</li>
               <li>Speed: {player1.speed}</li>
               <li>Durability: {player1.durability}</li>
@@ -348,17 +367,21 @@ const App = () => {
             </details>
           </div>
           <div className='flex-child' id='black'>
-            <input type='text' onChange={handleMatchNameChange} />
+
+          <h2>{newMatch.matchName}</h2>
+            <input type='text' name="matchName" placeholder='Input Name...' onChange={handleMatchNameChange} required='true' />
+            <button onClick={() => handleAddNewMatch()}>Update Name</button>
+
             <h1 className='center'>VS</h1>
-            <button onClick={() => handleAddNewMatch()} >Add Match</button>
             <button onClick={() => confirmNewMatch(newMatch)} >Confirm</button>
+
           </div>
           <div className='flex-child green'>
             <img id='full' className='resize' src={player2.image} alt={player2.name} />
             <h3>Name: {player2.name}</h3>
             <h4>Stats: </h4>
             <ul>
-              <li>Intellegence: {player2.intellegence}</li>
+              <li>Intelligence: {player2.intellegence}</li>
               <li>Strength: {player2.strength}</li>
               <li>Speed: {player2.speed}</li>
               <li>Durability: {player2.durability}</li>
@@ -416,7 +439,7 @@ const App = () => {
               <img src={superheros.images.sm} />
               <h4>Stats</h4>
               <ul>
-                <li>Intelligence: {superheros.powerstats.intelligence}</li>
+                <li>intelligence: {superheros.powerstats.intelligence}</li>
                 <li>Strength: {superheros.powerstats.strength}</li>
                 <li>Speed: {superheros.powerstats.speed}</li>
                 <li>Durability: {superheros.powerstats.durability}</li>
