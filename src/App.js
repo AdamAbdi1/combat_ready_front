@@ -437,6 +437,8 @@ const App = () => {
 
             <div key={superheros.id} className="flex-child">
               <h4>Name: {superheros.name}</h4>
+              <p><b>Real Name: </b>{superheros.biography.fullName}</p>
+              <p><b>Species: </b>{superheros.appearance.race}</p>
               <img src={superheros.images.sm} />
               <h4>Stats</h4>
               <ul>
@@ -445,7 +447,32 @@ const App = () => {
                 <li>Speed: {superheros.powerstats.speed}</li>
                 <li>Durability: {superheros.powerstats.durability}</li>
                 <li>Power: {superheros.powerstats.power}</li>
-                <li>Combat: {superheros.powerstats.combat}</li>
+
+                <button onClick={() => setPlayer1({
+                  name: superheros.name,
+                  realName: superheros.biography.fullName,
+                  species: superheros.appearance.race,
+                  intellegence: Number(superheros.powerstats.intelligence),
+                  strength: Number(superheros.powerstats.strength),
+                  speed: Number(superheros.powerstats.speed),
+                  durability: Number(superheros.powerstats.durability),
+                  power: Number(superheros.powerstats.power),
+                  image: superheros.images.sm
+                })}>Add to player 1</button>
+                
+                <button onClick={() => setPlayer2({
+                  name: superheros.name,
+                  realName: superheros.biography.fullName,
+                  species: superheros.appearance.race,
+                  intellegence: Number(superheros.powerstats.intelligence),
+                  strength: Number(superheros.powerstats.strength),
+                  speed: Number(superheros.powerstats.speed),
+                  durability: Number(superheros.powerstats.durability),
+                  power: Number(superheros.powerstats.power),
+                  image: superheros.images.sm
+                })}>Add to player 2</button>
+
+
               </ul>
             </div>
           )
