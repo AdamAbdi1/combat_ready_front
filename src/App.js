@@ -66,7 +66,7 @@ const App = () => {
   const [show, setShow] = useState(false)
   const [showMatch, setShowMatch] = useState(false)
   let [next, setNext] = useState(5)
-  const [next1, setNext1] = useState(0)
+  let [next1, setNext1] = useState(0)
   const [compare, setCompare] = useState(false)
   const [stage, setStage] = useState([])
 

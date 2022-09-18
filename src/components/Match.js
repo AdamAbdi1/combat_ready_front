@@ -31,12 +31,6 @@ const Match = (props) => {
   }
 
 
-  if (props.selMatch.intelligenceP1 > props.selMatch.intelligenceP2) {
-    console.log('fire')
-  }
-
-
-
   return (
     <>
     {edit ?
