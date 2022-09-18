@@ -37,6 +37,12 @@ button {
   display: flex;
   justify-content: space-between;
 }
+.redText {
+  color: red;
+}
+.greenText {
+  color: green;
+}
 .carousel {
   overflow: hidden;
 }

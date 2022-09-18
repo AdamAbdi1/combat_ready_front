@@ -459,7 +459,7 @@ const App = () => {
                   power: Number(superheros.powerstats.power),
                   image: superheros.images.sm
                 })}>Add to player 1</button>
-                
+
                 <button onClick={() => setPlayer2({
                   name: superheros.name,
                   realName: superheros.biography.fullName,
