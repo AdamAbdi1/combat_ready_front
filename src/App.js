@@ -2,14 +2,18 @@ import React, { useState, useEffect } from 'react'
 import axios from 'axios'
 import './App.css'
 import Results from './components/Results'
-import Carousel, { CarouselItem } from './component/Carousel'
+
 import Compare from './components/compare';
 
 import Add from './components/add';
 import Edit from './components/edit';
+import Stage from './components/stage'
 import Matches from './components/Matches'
 import Match from './components/Match'
 
+import Container from 'react-bootstrap/Container';
+import Row from 'react-bootstrap/Row';
+import Col from 'react-bootstrap/Col';
 
 const App = () => {
   const key = 104417709088771
@@ -67,8 +71,11 @@ const App = () => {
   const [showMatch, setShowMatch] = useState(false)
   let [next, setNext] = useState(5)
   let [next1, setNext1] = useState(0)
-  const [compare, setCompare] = useState(false)
-  const [stage, setStage] = useState([])
+  let [compare, setCompare] = useState(false)
+  let [stage, setStage] = useState([])
+  let [background, setBackground] = useState('')
+  let [showStage, setShowStage] = useState(false)
+
 
 
 
@@ -91,9 +98,9 @@ const App = () => {
   }, [])
 
 
-//-----------------------------------------------
-//  GET OUR DATA (MATCHES)
-//-----------------------------------------------
+  //-----------------------------------------------
+  //  GET OUR DATA (MATCHES)
+  //-----------------------------------------------
   const getMatches = () => {
     axios.get('http://localhost:8000/api/matches')
       .then(
@@ -127,39 +134,46 @@ const App = () => {
 
 
   //-----------------------------------------------
-  //  ADD
+  //  ADD Stage
   //-----------------------------------------------
-  const handleCreate = (addCharacter) => {
-    axios
-      .post('http://localhost:8000/api/matches', addCharacter)
+  const handleCreate = (addImage) => {
+    let nextId = stage[stage.length - 1].id + 1
+    axios.post('http://localhost:8000/api/Stage', addImage)
       .then((response) => {
-        console.log(response)
-        getMatches()
+        addImage.id = nextId
+        setStage([...stage, response.data])
+        console.log(addImage)
       })
   }
 
   //-----------------------------------------------
-  //  Delete
+  //  Delete Stage
   //-----------------------------------------------
   const handleDelete = (event) => {
     axios
-      .delete('http://localhost:8000/api/matches/' + event.target.value)
+      .delete('http://localhost:8000/api/Stage/' + event.target.value)
       .then((response) => {
-        getMatches()
+        getStages()
       })
     setShowMatch(false)
   }
 
+  const handleChangeBackground = (editBackground) => {
+    setBackground(editBackground.nameOfStage)
+    console.log(editBackground)
+  }
+
 
   //-----------------------------------------------
-  //  Edit
+  //  Edit Stage
   //-----------------------------------------------
-  const handleUpdate = (editCharacter) => {
-    console.log(editCharacter)
-    axios
-      .put('http://localhost:8000/api/matches/' + editCharacter.id, editCharacter)
+  const handleUpdate = (editImage) => {
+    console.log(editImage);
+    axios.put('http://localhost:8000/api/Stage/' + editImage.id, editImage)
       .then((response) => {
-        getMatches()
+        setStage(stage.map((image) => {
+          return image.id !== editImage ? image : editImage
+        }))
       })
   }
   //-----------------------------------------------
@@ -431,12 +445,31 @@ const App = () => {
               </form>
             </details>
           </div>
+          
+        {showStage ? <>
+          <div className="row">
+          {stage.map((image) => {
+            return (
+              <div key={image.id} className="column">
+                <img className='resize' src={image.nameOfStage}/>
+                <Edit handleUpdate={handleUpdate} image={image} />
+                <button onClick={handleDelete} value={image.id}>
+                  X
+                </button>
+                <Stage handleChangeBackground={handleChangeBackground} image={image} />
+              </div>
+            )
+          })}
         </div>
-        :
-        <p></p>
-      }
-      <Results results={results} search={search} setPlayer1={setPlayer1} setPlayer2={setPlayer2} />
-      <div><button onClick={handelPrevious}>Previous</button>
+        </>: <p hidden></p>}
+        </>
+          :
+          <p></p>
+        }
+        <Results results={results} search={search} setPlayer1={setPlayer1} setPlayer2={setPlayer2} />
+        
+        {hide === 'false' ? <p hidden></p> :
+        <div><button onClick={handelPrevious}>Previous</button>
         <div className='far-right'>
           <button onClick={handleNext} type='button'>Next</button>
         </div>
@@ -488,20 +521,11 @@ const App = () => {
           )
         })}
 
-      </div>
-      {/* <div className='App'>
-        <Carousel>
-          <CarouselItem>
-          <img className='dangerroom' src='https://static.wikia.nocookie.net/marvelvscapcom/images/e/e8/Danger_Room_Cota.png/revision/latest/scale-to-width-down/768?cb=20170908085232'
-          />
-          </CarouselItem>
-          <CarouselItem> Item 2</CarouselItem>
-          <CarouselItem>Item  3</CarouselItem>
-        </Carousel>
-      </div> */}
+        </div>
+          </div>
+      </>
+    )
+  }
 
-    </>
-  )
-}
 
-export default App
+  export default App
