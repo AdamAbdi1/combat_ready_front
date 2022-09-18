@@ -1,5 +1,4 @@
-import React, { useState, useEffect } from 'react'
-import axios from 'axios'
+import React, { useState } from 'react'
 
 const Result_card = (props) => {
 
@@ -11,7 +10,7 @@ const Result_card = (props) => {
       name: props.result.name,
       realName: props.result.biography['full-name'],
       species: props.result.appearance.race,
-      intellegence: Number(props.result.powerstats.intelligence),
+      intelligence: Number(props.result.powerstats.intelligence),
       strength: Number(props.result.powerstats.strength),
       speed: Number(props.result.powerstats.speed),
       durability: Number(props.result.powerstats.durability),
@@ -24,7 +23,7 @@ const Result_card = (props) => {
       name: props.result.name,
       realName: props.result.biography['full-name'],
       species: props.result.appearance.race,
-      intellegence: Number(props.result.powerstats.intelligence),
+      intelligence: Number(props.result.powerstats.intelligence),
       strength: Number(props.result.powerstats.strength),
       speed: Number(props.result.powerstats.speed),
       durability: Number(props.result.powerstats.durability),
@@ -48,7 +47,7 @@ const Result_card = (props) => {
         <div className='stats'>
           <h4>Stats: </h4>
           <ul>
-            <li>Intellegence: {props.result.powerstats.intelligence}</li>
+            <li>intelligence: {props.result.powerstats.intelligence}</li>
             <li>Strength: {props.result.powerstats.strength}</li>
             <li>Speed: {props.result.powerstats.speed}</li>
             <li>Durability: {props.result.powerstats.durability}</li>

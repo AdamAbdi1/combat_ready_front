@@ -3,7 +3,7 @@ import axios from 'axios'
 import Result_card from './Result_card'
 
 const Results = (props) => {
-  let [results, setResults] = useState(props.results)
+  const [results, setResults] = useState(props.results)
 
   return (
     <>
