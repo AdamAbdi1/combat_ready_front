@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import axios from 'axios'
 import './App.css'
 import Results from './components/Results'
-import Carousel, { CarouselItem } from './component/Carousel'
+
 import Compare from './components/compare';
 
 import Add from './components/add';
@@ -229,6 +229,7 @@ const App = () => {
     setShow(false)
   }
 
+
   const handleShowStage = () => {
     if (showStage === false) {
       setShowStage(true)
@@ -236,7 +237,6 @@ const App = () => {
     if (showStage === true) {
       setShowStage(false)
     }
-  }
 
 
   const handleAddNewMatch = () => {
@@ -277,204 +277,171 @@ const App = () => {
 
   return (
     <>
-      <div style={{
-        backgroundImage: `url(${background})`,
-        backgroundRepeat: "no-repeat",
-        backgroundAttachment: "fixed",
-        backgroundSize: "cover"
-      }}>
-        <div className="dropdown">
-          <button className="dropbtn">Show and Sort</button>
-          <div className="dropdown-content">
-            <a href="#" onClick={truefalse}>List of Heros</a>
-            <a href='#' onClick={handleSort}>Sort from Z to A</a>
-            <a href='#' onClick={handleSortByStrength}>Strength High to Low</a>
-          </div>
+      <div className="dropdown">
+        <button className="dropbtn">Options</button>
+        <div className="dropdown-content">
+          <a href="#" onClick={truefalse}>List of Heros</a>
+          <a href='#' onClick={handleSort}>Sort from z to a</a>
+          <a href='#' onClick={handleSortByStrength}>Strength high to low</a>
         </div>
-        <div className="dropdown">
-          <button className="dropbtn">Matches</button>
-          <div className="dropdown-content">
-            <Matches matches={matches} />
-          </div>
-        </div>
-        <h1>Search for Combatants</h1>
-        <form>
-          <input type='text' placeholder='search...' onChange={handleSearchChange} />
-          <button onClick={() => getSearch()}>Search</button>
-        </form>
-        <button onClick={handleCompare}>compare</button>
-        <Add handleCreate={handleCreate} />
-        {compare ?
-          <>
-            <div className='flex-container'>
-              <div className='flex-child magenta'>
-                <img className='resize' id='full' src={player1.image} alt={player1.name} />
-                <h3>Name: {player1.name}</h3>
-                <h4>Stats: </h4>
-                <ul>
-                  <li>Intellegence: {player1.intelligence}</li>
-                  <li>Strength: {player1.strength}</li>
-                  <li>Speed: {player1.speed}</li>
-                  <li>Durability: {player1.durability}</li>
-                  <li>Power: {player1.power}</li>
-                  <li>Combat: {player1.combat}</li>
-                </ul>
-                <details>
-                  <form onSubmit={handlePlayer1}>
-                    <label htmlFor="name">Name: </label>
-                    <input type="text" name="name" value={player1.name} onChange={handlePlayerStats} />
-                    <br />
-                    <br />
-                    <label htmlFor="intelligence">intelligence: </label>
-                    <input type="number" name="intelligence" value={player1.intelligence} onChange={handlePlayerStats} />
-                    <br />
-                    <br />
-                    <label htmlFor="strength">strength: </label>
-                    <input type="number" name="strength" value={player1.strength} onChange={handlePlayerStats} />
-                    <br />
-                    <br />
-                    <label htmlFor="speed">speed: </label>
-                    <input type="number" name="speed" value={player1.speed} onChange={handlePlayerStats} />
-                    <br />
-                    <br />
-                    <label htmlFor="durability">Durability: </label>
-                    <input type="number" name="durability" value={player1.durability} onChange={handlePlayerStats} />
-                    <br />
-                    <br />
-                    <label htmlFor="power">power: </label>
-                    <input type="number" name="power" value={player1.power} onChange={handlePlayerStats} />
-                    <br />
-                    <br />
-                    <label htmlFor="comabt">combat: </label>
-                    <input type="number" name="combat" value={player1.combat} onChange={handlePlayerStats} /><br />
-                    <input type="submit" />
-                  </form>
-                </details>
-              </div>
-              <div className='flex-child' id='black'>
-                <input type='text' placeholder='search...' onChange={handleMatchNameChange} />
-                <h1 className='center'>VS</h1>
-                <button onClick={() => handleAddNewMatch()} >Add Match</button>
-                <button onClick={() => confirmNewMatch(newMatch)} >Confirm</button>
-              </div>
-              <div className='flex-child green'>
-                <img id='full' className='resize' src={player2.image} alt={player2.name} />
-                <h3>Name: {player2.name}</h3>
-                <h4>Stats: </h4>
-                <ul>
-                  <li>Intellegence: {player2.intellegence}</li>
-                  <li>Strength: {player2.strength}</li>
-                  <li>Speed: {player2.speed}</li>
-                  <li>Durability: {player2.durability}</li>
-                  <li>Power: {player2.power}</li>
-                  <li>Combat: {player2.combat}</li>
-                </ul>
-                <details>
-                  <form>
-                    <label htmlFor="name">Name: </label>
-                    <input type="text" name="name" value={player2.name} onChange={handlePlayerStats2} />
-                    <br />
-                    <br />
-                    <label htmlFor="intelligence">intelligence: </label>
-                    <input type="number" name="intellegence" value={player2.intellegence} onChange={handlePlayerStats2} />
-                    <br />
-                    <br />
-                    <label htmlFor="strength">strength: </label>
-                    <input type="number" name="strength" value={player2.strength} onChange={handlePlayerStats2} />
-                    <br />
-                    <br />
-                    <label htmlFor="speed">speed: </label>
-                    <input type="number" name="speed" value={player2.speed} onChange={handlePlayerStats2} />
-                    <br />
-                    <br />
-                    <label htmlFor="durability">Durability: </label>
-                    <input type="number" name="durability" value={player2.durability} onChange={handlePlayerStats2} />
-                    <br />
-                    <br />
-                    <label htmlFor="power">power: </label>
-                    <input type="number" name="power" value={player2.power} onChange={handlePlayerStats2} />
-                    <br />
-                    <br />
-                    <label htmlFor="comabt">combat: </label>
-                    <input type="number" name="combat" value={player2.combat} onChange={handlePlayerStats2} /><br />
-                    <input type="submit" />
-                  </form>
-                </details>
-              </div>
-            </div>
-
-            <button onClick={handleShowStage}>show stages</button>
-            {showStage ?
-              <>
-                <div className='row'>
-                  {stage.map((image) => {
-                    return (
-                      <div key={image.id} className="column">
-                        <img className='resize' src={image.nameOfStage} />
-                        <Edit handleUpdate={handleUpdate} image={image} />
-                        <button onClick={handleDelete} value={image.id}>
-                          X
-                        </button>
-                        <Stage handleChangeBackground={handleChangeBackground} image={image} />
-                      </div>
-                    )
-                  })}
-                </div>
-              </>
-              :
-              <p></p>}
-          </>
-          :
-          <p></p>
-        }
-
-        <Results results={results} search={search} setPlayer1={setPlayer1} setPlayer2={setPlayer2} />
-        {/* <div><button onClick={handelPrevious}>Previous</button>
-          <div className='far-right'>
-            <button onClick={handleNext} type='button'>Next</button>
-          </div>
-        </div> */}
-        {hide === 'false' ? <p hidden></p> :
-          <div><button onClick={handelPrevious}>Previous</button>
-            <div className='far-right'>
-              <button onClick={handleNext} type='button'>Next</button>
-            </div>
-          </div>
-        }
-        <div className="flex-container">
-          {hide === 'false' ? <p hidden></p> :
-            superHero.slice(next1, next).map((superheros) => {
-              return (
-                <div key={superheros.id} className="flex-child" id="color">
-                  <img src={superheros.images.sm} />
-                  <h4>Name: {superheros.name}</h4>
-                  <h4>Stats</h4>
-                  <ul>
-                    <li>Intelligence: {superheros.powerstats.intelligence}</li>
-                    <li>Strength: {superheros.powerstats.strength}</li>
-                    <li>Speed: {superheros.powerstats.speed}</li>
-                    <li>Durability: {superheros.powerstats.durability}</li>
-                    <li>Power: {superheros.powerstats.power}</li>
-                    <li>Combat: {superheros.powerstats.combat}</li>
-                  </ul>
-                </div>
-              )
-
-            })}
-        </div>
-        {/* <div className='App'>
-        <Carousel>
-          <CarouselItem>
-          <img className='dangerroom' src='https://static.wikia.nocookie.net/marvelvscapcom/images/e/e8/Danger_Room_Cota.png/revision/latest/scale-to-width-down/768?cb=20170908085232'
-          />
-          </CarouselItem>
-          <CarouselItem> Item 2</CarouselItem>
-          <CarouselItem>Item  3</CarouselItem>
-        </Carousel>
-      </div> */}
       </div>
+      <div className="dropdown">
+        <button className="dropbtn">Matches</button>
+        <div className="dropdown-content">
+          <Matches matches={matches} />
+        </div>
+      </div>
+      <h1>Search for Combatants</h1>
+      <form>
+        <input type='text' placeholder='search...' onChange={handleSearchChange} />
+        <button onClick={() => getSearch()}>Search</button>
+      </form>
+      <button onClick={handleCompare}>compare</button>
+      <Add handleCreate={handleCreate} />
+      <div className="people">
+        {stage.map((image) => {
+          return (
+            <div key={image.id}>
+              <h4>Name: {image.nameOfStage}</h4>
+              <Edit handleUpdate={handleUpdate} image={image} />
+              <button onClick={handleDelete} value={image.id}>
+                X
+              </button>
+            </div>
+          )
+        })}
+      </div>
+      {compare ?
+        <div className='flex-container'>
+          <div className='flex-child magenta'>
+            <img className='resize' id='full' src={player1.image} alt={player1.name} />
+            <h3>Name: {player1.name}</h3>
+            <h4>Stats: </h4>
+            <ul>
+              <li>Intellegence: {player1.intelligence}</li>
+              <li>Strength: {player1.strength}</li>
+              <li>Speed: {player1.speed}</li>
+              <li>Durability: {player1.durability}</li>
+              <li>Power: {player1.power}</li>
+              <li>Combat: {player1.combat}</li>
+            </ul>
+            <details>
+              <form onSubmit={handlePlayer1}>
+                <label htmlFor="name">Name: </label>
+                <input type="text" name="name" value={player1.name} onChange={handlePlayerStats} />
+                <br />
+                <br />
+                <label htmlFor="intelligence">intelligence: </label>
+                <input type="number" name="intelligence" value={player1.intelligence} onChange={handlePlayerStats} />
+                <br />
+                <br />
+                <label htmlFor="strength">strength: </label>
+                <input type="number" name="strength" value={player1.strength} onChange={handlePlayerStats} />
+                <br />
+                <br />
+                <label htmlFor="speed">speed: </label>
+                <input type="number" name="speed" value={player1.speed} onChange={handlePlayerStats} />
+                <br />
+                <br />
+                <label htmlFor="durability">Durability: </label>
+                <input type="number" name="durability" value={player1.durability} onChange={handlePlayerStats} />
+                <br />
+                <br />
+                <label htmlFor="power">power: </label>
+                <input type="number" name="power" value={player1.power} onChange={handlePlayerStats} />
+                <br />
+                <br />
+                <label htmlFor="comabt">combat: </label>
+                <input type="number" name="combat" value={player1.combat} onChange={handlePlayerStats} /><br />
+                <input type="submit" />
+              </form>
+            </details>
+          </div>
+          <div className='flex-child' id='black'>
+            <input type='text' placeholder='search...' onChange={handleMatchNameChange} />
+            <h1 className='center'>VS</h1>
+            <button onClick={() => handleAddNewMatch()} >Add Match</button>
+            <button onClick={() => confirmNewMatch(newMatch)} >Confirm</button>
+          </div>
+          <div className='flex-child green'>
+            <img id='full' className='resize' src={player2.image} alt={player2.name} />
+            <h3>Name: {player2.name}</h3>
+            <h4>Stats: </h4>
+            <ul>
+              <li>Intellegence: {player2.intellegence}</li>
+              <li>Strength: {player2.strength}</li>
+              <li>Speed: {player2.speed}</li>
+              <li>Durability: {player2.durability}</li>
+              <li>Power: {player2.power}</li>
+              <li>Combat: {player2.combat}</li>
+            </ul>
+            <details>
+              <form>
+                <label htmlFor="name">Name: </label>
+                <input type="text" name="name" value={player2.name} onChange={handlePlayerStats2} />
+                <br />
+                <br />
+                <label htmlFor="intelligence">intelligence: </label>
+                <input type="number" name="intellegence" value={player2.intellegence} onChange={handlePlayerStats2} />
+                <br />
+                <br />
+                <label htmlFor="strength">strength: </label>
+                <input type="number" name="strength" value={player2.strength} onChange={handlePlayerStats2} />
+                <br />
+                <br />
+                <label htmlFor="speed">speed: </label>
+                <input type="number" name="speed" value={player2.speed} onChange={handlePlayerStats2} />
+                <br />
+                <br />
+                <label htmlFor="durability">Durability: </label>
+                <input type="number" name="durability" value={player2.durability} onChange={handlePlayerStats2} />
+                <br />
+                <br />
+                <label htmlFor="power">power: </label>
+                <input type="number" name="power" value={player2.power} onChange={handlePlayerStats2} />
+                <br />
+                <br />
+                <label htmlFor="comabt">combat: </label>
+                <input type="number" name="combat" value={player2.combat} onChange={handlePlayerStats2} /><br />
+                <input type="submit" />
+              </form>
+            </details>
+          </div>
+        </div>
+        :
+        <p></p>
+      }
+      <Results results={results} search={search} setPlayer1={setPlayer1} setPlayer2={setPlayer2} />
+      <div><button onClick={handelPrevious}>Previous</button>
+        <div className='far-right'>
+          <button onClick={handleNext} type='button'>Next</button>
+        </div>
+      </div>
+      <div className="flex-container">
+        {hide === 'false' ? <p hidden></p> : superHero.slice(next1, next).map((superheros) => {
+          return (
+
+            <div key={superheros.id} className="flex-child">
+              <h4>Name: {superheros.name}</h4>
+              <img src={superheros.images.sm} />
+              <h4>Stats</h4>
+              <ul>
+                <li>Intelligence: {superheros.powerstats.intelligence}</li>
+                <li>Strength: {superheros.powerstats.strength}</li>
+                <li>Speed: {superheros.powerstats.speed}</li>
+                <li>Durability: {superheros.powerstats.durability}</li>
+                <li>Power: {superheros.powerstats.power}</li>
+                <li>Combat: {superheros.powerstats.combat}</li>
+              </ul>
+            </div>
+          )
+        })}
+
+      </div>
+
     </>
   )
+}
 }
 
 export default App
