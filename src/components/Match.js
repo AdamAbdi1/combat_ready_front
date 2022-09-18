@@ -128,19 +128,19 @@ const Match = (props) => {
             <div className='stats'>
               <h4>Stats: </h4>
               <ul>
-                {props.selMatch.intelligenceP1 > props.selMatch.intelligenceP2 ?
+                {Number(props.selMatch.intelligenceP1) > Number(props.selMatch.intelligenceP2) ?
                   <li>Intelligence: {props.selMatch.intelligenceP1} <b className='greenText'>(+{Math.abs(props.selMatch.intelligenceP1 -props.selMatch.intelligenceP2)})</b> </li>
                   : <li>Intelligence: {props.selMatch.intelligenceP1} <b className='redText'>(-{Math.abs(props.selMatch.intelligenceP1 -props.selMatch.intelligenceP2)})</b> </li>}
-                {props.selMatch.strengthP1 > props.selMatch.strengthP2 ?
+                {Number(props.selMatch.strengthP1) > Number(props.selMatch.strengthP2) ?
                   <li>Strength: {props.selMatch.strengthP1} <b className='greenText'>(+{Math.abs(props.selMatch.strengthP1 -props.selMatch.strengthP2)})</b> </li>
                   : <li>Strength: {props.selMatch.strengthP1} <b className='redText'>(-{Math.abs(props.selMatch.strengthP1 -props.selMatch.strengthP2)})</b> </li>}
-                {props.selMatch.speedP1 > props.selMatch.speedP2 ?
+                {Number(props.selMatch.speedP1) > Number(props.selMatch.speedP2) ?
                   <li>Speed: {props.selMatch.speedP1} <b className='greenText'>(+{Math.abs(props.selMatch.speedP1 -props.selMatch.speedP2)})</b> </li>
                   : <li>Speed: {props.selMatch.speedP1} <b className='redText'>(-{Math.abs(props.selMatch.speedP1 -props.selMatch.speedP2)})</b> </li>}
-                {props.selMatch.speedP1 > props.selMatch.speedP2 ?
+                {Number(props.selMatch.durabilityP1) > Number(props.selMatch.durabilityP2) ?
                   <li>Durability: {props.selMatch.durabilityP1} <b className='greenText'>(+{Math.abs(props.selMatch.durabilityP1 -props.selMatch.durabilityP2)})</b> </li>
                   : <li>Durability: {props.selMatch.durabilityP1} <b className='redText'>(-{Math.abs(props.selMatch.durabilityP1 -props.selMatch.durabilityP2)})</b> </li>}
-                {props.selMatch.powerP1 > props.selMatch.powerP2 ?
+                {Number(props.selMatch.powerP1) > Number(props.selMatch.powerP2) ?
                   <li>Power: {props.selMatch.powerP1} <b className='greenText'>(+{Math.abs(props.selMatch.powerP1 -props.selMatch.powerP2)})</b> </li>
                   : <li>Power: {props.selMatch.powerP1} <b className='redText'>(-{Math.abs(props.selMatch.powerP1 -props.selMatch.powerP2)})</b> </li>}
               </ul>
@@ -158,19 +158,19 @@ const Match = (props) => {
             <div className='stats'>
               <h4>Stats: </h4>
               <ul>
-                {props.selMatch.intelligenceP1 < props.selMatch.intelligenceP2 ?
+                {Number(props.selMatch.intelligenceP1) < Number(props.selMatch.intelligenceP2) ?
                   <li>Intelligence: {props.selMatch.intelligenceP2} <b className='greenText'>(+{Math.abs(props.selMatch.intelligenceP1 -props.selMatch.intelligenceP2)})</b> </li>
                   : <li> Intelligence: {props.selMatch.intelligenceP2} <b className='redText'>(-{Math.abs(props.selMatch.intelligenceP1 -props.selMatch.intelligenceP2)})</b></li>  }
-                {props.selMatch.strengthP1 < props.selMatch.strengthP2 ?
+                {Number(props.selMatch.strengthP1) < Number(props.selMatch.strengthP2) ?
                   <li>Strength: {props.selMatch.strengthP2} <b className='greenText'>(+{Math.abs(props.selMatch.strengthP1 -props.selMatch.strengthP2)})</b> </li>
                   : <li>Strength: {props.selMatch.strengthP2} <b className='redText'>(-{Math.abs(props.selMatch.strengthP1 -props.selMatch.strengthP2)})</b> </li>}
-                {props.selMatch.speedP1 < props.selMatch.speedP2 ?
+                {Number(props.selMatch.speedP1) < Number(props.selMatch.speedP2) ?
                   <li>Speed: {props.selMatch.speedP2} <b className='greenText'>(+{Math.abs(props.selMatch.speedP1 -props.selMatch.speedP2)})</b> </li>
                   : <li>Speed: {props.selMatch.speedP2} <b className='redText'>(-{Math.abs(props.selMatch.speedP1 -props.selMatch.speedP2)})</b> </li>}
-                {props.selMatch.speedP1 < props.selMatch.speedP2 ?
+                {Number(props.selMatch.durabilityP1) < Number(props.selMatch.durabilityP2) ?
                   <li>Durability: {props.selMatch.durabilityP2} <b className='greenText'>(+{Math.abs(props.selMatch.durabilityP1 -props.selMatch.durabilityP2)})</b> </li>
                   : <li>Durability: {props.selMatch.durabilityP2} <b className='redText'>(-{Math.abs(props.selMatch.durabilityP1 -props.selMatch.durabilityP2)})</b> </li>}
-                {props.selMatch.powerP1 < props.selMatch.powerP2 ?
+                {Number(props.selMatch.powerP1) < Number(props.selMatch.powerP2) ?
                   <li>Power: {props.selMatch.powerP2} <b className='greenText'>(+{Math.abs(props.selMatch.powerP1 -props.selMatch.powerP2)})</b> </li>
                   : <li>Power: {props.selMatch.powerP2} <b className='redText'>(-{Math.abs(props.selMatch.powerP1 -props.selMatch.powerP2)})</b> </li>}
               </ul>

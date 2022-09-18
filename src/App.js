@@ -165,9 +165,9 @@ const App = () => {
   //-----------------------------------------------
   //  EDIT MATCH
   //-----------------------------------------------
-  const handleUpdateMatch = (updateMatch) => {
+  const handleUpdateMatch = (event) => {
     axios
-      .put('http://localhost:8000/api/matches/' + updateMatch.id, updateMatch)
+      .put('http://localhost:8000/api/matches/' + event.target.value.id, event.target.value)
       .then((response) => {
         getMatches()
       })
@@ -220,6 +220,7 @@ const App = () => {
 
   useEffect(() => {
     getMatches()
+    getSearch()
   }, [])
 
 
