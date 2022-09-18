@@ -162,7 +162,16 @@ const App = () => {
         getMatches()
       })
   }
-
+  //-----------------------------------------------
+  //  EDIT MATCH
+  //-----------------------------------------------
+  const handleUpdateMatch = (updateMatch) => {
+    axios
+      .put('http://localhost:8000/api/matches/' + updateMatch.id, updateMatch)
+      .then((response) => {
+        getMatches()
+      })
+  }
 
 
   //-----------------------------------------------
@@ -292,8 +301,8 @@ const App = () => {
   //-----------------------------------------------
   const handleMatchNameChange = (event) => {
     event.preventDefault()
-    setMatchName(event.target.value)
-    // setNewMatch({...newMatch, [event.target.matchName]:event.target.value })
+    // setMatchName(event.target.value)
+    setNewMatch({...newMatch, [event.target.name]:event.target.value })
   }
 
   return (
@@ -317,7 +326,7 @@ const App = () => {
         <input type='text' placeholder='search...' onChange={handleSearchChange} />
         <button onClick={() => getSearch()}>Search</button>
       </form>
-      {showMatch ? <Match selMatch={selMatch} setShowMatch={setShowMatch} handleDelete={handleDelete}/> : <></>}
+      {showMatch ? <Match selMatch={selMatch} setShowMatch={setShowMatch} handleDelete={handleDelete} handleUpdateMatch={handleUpdateMatch}/> : <></>}
 
       <button onClick={handleCompare}>compare</button>
       {/* <Add handleCreate={handleCreate} /> */}
