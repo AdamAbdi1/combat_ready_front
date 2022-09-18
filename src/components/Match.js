@@ -3,7 +3,32 @@ import React, { useState } from 'react'
 
 const Match = (props) => {
   const [edit, setEdit] = useState(false)
-  const [matchEdit, setMatchEdit] = useState({...props.selMatch})
+  let emptyMatch = {
+    matchName: '',
+    nameP1: '',
+    realNameP1: '',
+    speciesP1: '',
+    intellegenceP1: 0,
+    strengthP1: 0,
+    speedP1: 0,
+    durabilityP1: 0,
+    powerP1: 0,
+    imageP1: '',
+    nameP2: '',
+    realNameP2: '',
+    speciesP2: '',
+    intellegenceP2: 0,
+    strengthP2: 0,
+    speedP2: 0,
+    durabilityP2: 0,
+    powerP2: 0,
+    imageP2: ''
+  }
+  const [matchEdit, setMatchEdit] = useState(emptyMatch)
+
+  const handleUpdateEdit = (event) => {
+    setMatchEdit({...matchEdit, [event.target.matchName]: event.target.value})
+  }
 
 
   return (
@@ -12,8 +37,10 @@ const Match = (props) => {
       <>
     <button onClick={() => props.setShowMatch(false)}>Close Match</button>
     <button onClick={() => setEdit(false)}>Cancel Edit</button>
+    <button onClick={props.handleDelete} value={props.selMatch.id}>Delete</button>
       <form className='mainContainer edit'>
-      <h2>{props.selMatch.matchName}</h2>
+      <label htmlFor='matchName'>Match Name: </label>
+      <input type='text' name='matchName' placeHolder={props.selMatch.matchName} onChange={handleUpdateEdit}/>
         <div className='cardContainer'>
           <div className='resultCard'>
             <div className='cardHead'>

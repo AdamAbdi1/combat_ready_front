@@ -147,6 +147,7 @@ const App = () => {
       .then((response) => {
         getMatches()
       })
+    setShowMatch(false)
   }
 
 
@@ -291,8 +292,8 @@ const App = () => {
   //-----------------------------------------------
   const handleMatchNameChange = (event) => {
     event.preventDefault()
-    // setMatchName(event.target.value)
-    setNewMatch({...newMatch, [event.target.matchName]:event.target.value })
+    setMatchName(event.target.value)
+    // setNewMatch({...newMatch, [event.target.matchName]:event.target.value })
   }
 
   return (
@@ -308,7 +309,7 @@ const App = () => {
       <div className="dropdown">
         <button className="dropbtn">Matches</button>
         <div className="dropdown-content">
-          <Matches matches={matches} setShowMatch={setShowMatch} setCompare={setCompare} setSelMatch={setSelMatch}/>
+          <Matches matches={matches} setShowMatch={setShowMatch} setCompare={setCompare} setSelMatch={setSelMatch} handleDelete={handleDelete}/>
         </div>
       </div>
       <h1>Search for Combatants</h1>
@@ -316,7 +317,7 @@ const App = () => {
         <input type='text' placeholder='search...' onChange={handleSearchChange} />
         <button onClick={() => getSearch()}>Search</button>
       </form>
-      {showMatch ? <Match selMatch={selMatch} setShowMatch={setShowMatch}/> : <></>}
+      {showMatch ? <Match selMatch={selMatch} setShowMatch={setShowMatch} handleDelete={handleDelete}/> : <></>}
 
       <button onClick={handleCompare}>compare</button>
       {/* <Add handleCreate={handleCreate} /> */}

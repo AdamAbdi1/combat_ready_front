@@ -33,7 +33,10 @@ button {
 .cardImg {
   width: 7em;
 }
-
+.matchMenu {
+  display: flex;
+  justify-content: space-between;
+}
 .carousel {
   overflow: hidden;
 }
