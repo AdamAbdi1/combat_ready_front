@@ -2,10 +2,17 @@ import React, { useState, useEffect } from 'react'
 import axios from 'axios'
 import './App.css'
 import Results from './components/Results'
-import Carousel, { CarouselItem } from './component/Carousel'
+// import Carousel, { CarouselItem } from './component/Carousel'
+import 'bootstrap/dist/css/bootstrap.min.css'
+import {
+  CarouselControl,
+  Carousel,
+  CarouselItem,
+  CarouselIndicators,
+} from 'reactstrap'
+// import Carousel from 'react-bootstrap/Carousel'
 
-
-import ImageSlider from './component/ImageSlider'
+// import ImageSlider from './component/ImageSlider'
 
 
 
@@ -33,6 +40,7 @@ const App = () => {
   let [next1, setNext1] = useState(0)
   let [compare, setCompare] = useState(false)
   let [stage, setStage] = useState([])
+  
 
 
 
@@ -94,10 +102,10 @@ const App = () => {
   //  ADD Stage
   //-----------------------------------------------
   const handleCreate = (addImage) => {
-    let nextId = stage[stage.length - 1].id + 1
+    
     axios.post('http://localhost:8000/api/Stage', addImage)
       .then((response) => {
-        addImage.id = nextId
+        
         setStage([...stage, response.data])
         console.log(addImage)
       })
@@ -224,9 +232,9 @@ const App = () => {
     setShow(false)
   }
 
-  function ImageSlider() {
-    return <ImageSlider/>
-  }
+  // function ImageSlider() {
+  //   return <ImageSlider/>
+  // }
 
 
   const handleAddNewMatch = () => {
@@ -263,6 +271,56 @@ const App = () => {
   const handleMatchNameChange = (event) => {
     setMatchName(event.target.value)
   }
+  
+    const [ activeIndex, setActiveIndex] = React.useState(0)
+    const [ animating, setAnimating] = React.useState(false)
+    const items = [
+      {
+        caption: 'Stage 1',
+        src: 'https://static.wikia.nocookie.net/marvelvscapcom/images/e/e8/Danger_Room_Cota.png/revision/latest/scale-to-width-down/768?cb=20170908085232',
+        altText: 'Stage 1'
+      },
+      {
+        caption: 'Stage 2',
+        src: 'https://i.pinimg.com/originals/46/5b/ab/465bab82365aacbf3660b094805b95d7.gif',
+        altText: 'Stage 2'
+      },
+      {
+        caption: 'Stage 3',
+        src: 'https://i0.wp.com/i.pinimg.com/originals/fd/eb/a1/fdeba10c58e6033205d92d811749acc2.gif?resize=160,120',
+        altText: 'Stage 3'
+      }
+    ]
+
+    const itemLength = items.length - 1
+    const previousButton = () => {
+      if (animating) return
+      const nextIndex = activeIndex === 0 ?
+        itemLength : activeIndex - 1 
+      setActiveIndex(nextIndex)
+    }
+
+    const nextButton = () => {
+      if(animating) return
+      const nextIndex = activeIndex === itemLength ?
+        0 : activeIndex + 1
+      setActiveIndex(nextIndex)
+    }
+
+    const carouselItemData = items.map((item) => {
+      return (
+        <CarouselItem
+        key={item.src}
+        onExited={() => setAnimating(false)}
+        onExiting={() => setAnimating(true)}
+        >
+          <img src={item.src} alt={item.altText} />
+        </CarouselItem>
+      )
+    })
+
+    
+  
 
 
   return (
@@ -426,15 +484,28 @@ const App = () => {
             </div>
           )
         })}
+        
+      <div style={{
+          display: 'block', width: 320, padding: 30
+      }}>
 
+          <Carousel previous={previousButton} next={nextButton}
+              activeIndex={activeIndex}>
+              <CarouselIndicators items={items}
+                  activeIndex={activeIndex}
+                  onClickHandler={(newIndex) => {
+                      if (animating) return;
+                      setActiveIndex(newIndex);
+                  }} />
+              {carouselItemData}
+              <CarouselControl directionText="Prev"
+                  direction="prev" onClickHandler={previousButton} />
+              <CarouselControl directionText="Next"
+                  direction="next" onClickHandler={nextButton} />
+          </Carousel>
+      </div >
       </div>
-      {/* <div className='App'>
-        <Carousel>
-          <CarouselItem/>
-          <CarouselItem/> 
-          <CarouselItem/>
-        </Carousel>
-      </div> */}
+        
 
     </>
   )
