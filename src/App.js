@@ -19,7 +19,7 @@ const App = () => {
     nameP1: '',
     realNameP1: '',
     speciesP1: '',
-    intellegenceP1: 0,
+    intelligenceP1: 0,
     strengthP1: 0,
     speedP1: 0,
     durabilityP1: 0,
@@ -28,7 +28,7 @@ const App = () => {
     nameP2: '',
     realNameP2: '',
     speciesP2: '',
-    intellegenceP2: 0,
+    intelligenceP2: 0,
     strengthP2: 0,
     speedP2: 0,
     durabilityP2: 0,
@@ -40,7 +40,7 @@ const App = () => {
     nameP1: '',
     realNameP1: '',
     speciesP1: '',
-    intellegenceP1: 0,
+    intelligenceP1: 0,
     strengthP1: 0,
     speedP1: 0,
     durabilityP1: 0,
@@ -49,7 +49,7 @@ const App = () => {
     nameP2: '',
     realNameP2: '',
     speciesP2: '',
-    intellegenceP2: 0,
+    intelligenceP2: 0,
     strengthP2: 0,
     speedP2: 0,
     durabilityP2: 0,
@@ -266,7 +266,7 @@ const App = () => {
       nameP1: player1.name,
       realNameP1: player1.realName,
       speciesP1: player1.species,
-      intelligenceP1: player1.intellegence,
+      intelligenceP1: player1.intelligence,
       strengthP1: player1.strength,
       speedP1: player1.speed,
       durabilityP1: player1.durability,
@@ -275,7 +275,7 @@ const App = () => {
       nameP2: player2.name,
       realNameP2: player2.realName,
       speciesP2: player2.species,
-      intelligenceP2: player2.intellegence,
+      intelligenceP2: player2.intelligence,
       strengthP2: player2.strength,
       speedP2: player2.speed,
       durabilityP2: player2.durability,
@@ -328,7 +328,7 @@ const App = () => {
             <h3>Name: {player1.name}</h3>
             <h4>Stats: </h4>
             <ul>
-              <li>Intelligence: {player1.intellegence}</li>
+              <li>Intelligence: {player1.intelligence}</li>
               <li>Strength: {player1.strength}</li>
               <li>Speed: {player1.speed}</li>
               <li>Durability: {player1.durability}</li>
@@ -382,7 +382,7 @@ const App = () => {
             <h3>Name: {player2.name}</h3>
             <h4>Stats: </h4>
             <ul>
-              <li>Intelligence: {player2.intellegence}</li>
+              <li>Intelligence: {player2.intelligence}</li>
               <li>Strength: {player2.strength}</li>
               <li>Speed: {player2.speed}</li>
               <li>Durability: {player2.durability}</li>
@@ -396,7 +396,7 @@ const App = () => {
                 <br />
                 <br />
                 <label htmlFor="intelligence">intelligence: </label>
-                <input type="number" name="intellegence" value={player2.intellegence} onChange={handlePlayerStats2} />
+                <input type="number" name="intelligence" value={player2.intelligence} onChange={handlePlayerStats2} />
                 <br />
                 <br />
                 <label htmlFor="strength">strength: </label>
@@ -452,7 +452,7 @@ const App = () => {
                   name: superheros.name,
                   realName: superheros.biography.fullName,
                   species: superheros.appearance.race,
-                  intellegence: Number(superheros.powerstats.intelligence),
+                  intelligence: Number(superheros.powerstats.intelligence),
                   strength: Number(superheros.powerstats.strength),
                   speed: Number(superheros.powerstats.speed),
                   durability: Number(superheros.powerstats.durability),
@@ -464,7 +464,7 @@ const App = () => {
                   name: superheros.name,
                   realName: superheros.biography.fullName,
                   species: superheros.appearance.race,
-                  intellegence: Number(superheros.powerstats.intelligence),
+                  intelligence: Number(superheros.powerstats.intelligence),
                   strength: Number(superheros.powerstats.strength),
                   speed: Number(superheros.powerstats.speed),
                   durability: Number(superheros.powerstats.durability),

@@ -8,7 +8,7 @@ const Match = (props) => {
     nameP1: '',
     realNameP1: '',
     speciesP1: '',
-    intellegenceP1: 0,
+    intelligenceP1: 0,
     strengthP1: 0,
     speedP1: 0,
     durabilityP1: 0,
@@ -17,7 +17,7 @@ const Match = (props) => {
     nameP2: '',
     realNameP2: '',
     speciesP2: '',
-    intellegenceP2: 0,
+    intelligenceP2: 0,
     strengthP2: 0,
     speedP2: 0,
     durabilityP2: 0,
@@ -44,6 +44,8 @@ const Match = (props) => {
         <div className='cardContainer'>
           <div className='resultCard'>
             <div className='cardHead'>
+              <label htmlFor='nameP1'>Combatant Name: </label>
+              <input type='text' name='nameP1' placeHolder={props.selMatch.nameP1} onChange={handleUpdateEdit}/>
               <h3>{props.selMatch.nameP1}</h3>
               <p><b>Real Name: </b>{props.selMatch.realNameP1}</p>
               <p><b>Species: </b>{props.selMatch.speciesP1}</p>
@@ -53,7 +55,7 @@ const Match = (props) => {
               <div className='stats'>
                 <h4>Stats: </h4>
                 <ul>
-                  <li>Intellegence: {props.selMatch.intelligenceP1}</li>
+                  <li>Intelligence: {props.selMatch.intelligenceP1}</li>
                   <li>Strength: {props.selMatch.strengthP1}</li>
                   <li>Speed: {props.selMatch.speedP1}</li>
                   <li>Durability: {props.selMatch.durabilityP1}</li>
@@ -73,7 +75,7 @@ const Match = (props) => {
               <div className='stats'>
                 <h4>Stats: </h4>
                 <ul>
-                  <li>Intellegence: {props.selMatch.intelligenceP2}</li>
+                  <li>Intelligence: {props.selMatch.intelligenceP2}</li>
                   <li>Strength: {props.selMatch.strengthP2}</li>
                   <li>Speed: {props.selMatch.speedP2}</li>
                   <li>Durability: {props.selMatch.durabilityP2}</li>
@@ -105,8 +107,8 @@ const Match = (props) => {
               <h4>Stats: </h4>
               <ul>
                 {props.selMatch.intelligenceP1 > props.selMatch.intelligenceP2 ?
-                  <li>Intellegence: {props.selMatch.intelligenceP1} <b className='greenText'>(+{Math.abs(props.selMatch.intelligenceP1 -props.selMatch.intelligenceP2)})</b> </li>
-                  : <li>Intellegence: {props.selMatch.intelligenceP1} <b className='redText'>(-{Math.abs(props.selMatch.intelligenceP1 -props.selMatch.intelligenceP2)})</b> </li>}
+                  <li>Intelligence: {props.selMatch.intelligenceP1} <b className='greenText'>(+{Math.abs(props.selMatch.intelligenceP1 -props.selMatch.intelligenceP2)})</b> </li>
+                  : <li>Intelligence: {props.selMatch.intelligenceP1} <b className='redText'>(-{Math.abs(props.selMatch.intelligenceP1 -props.selMatch.intelligenceP2)})</b> </li>}
                 {props.selMatch.strengthP1 > props.selMatch.strengthP2 ?
                   <li>Strength: {props.selMatch.strengthP1} <b className='greenText'>(+{Math.abs(props.selMatch.strengthP1 -props.selMatch.strengthP2)})</b> </li>
                   : <li>Strength: {props.selMatch.strengthP1} <b className='redText'>(-{Math.abs(props.selMatch.strengthP1 -props.selMatch.strengthP2)})</b> </li>}
@@ -135,8 +137,8 @@ const Match = (props) => {
               <h4>Stats: </h4>
               <ul>
                 {props.selMatch.intelligenceP1 < props.selMatch.intelligenceP2 ?
-                  <li>Intellegence: {props.selMatch.intelligenceP2} <b className='greenText'>(+{Math.abs(props.selMatch.intelligenceP1 -props.selMatch.intelligenceP2)})</b> </li>
-                  : <li> Intellegence: {props.selMatch.intelligenceP2} <b className='redText'>(-{Math.abs(props.selMatch.intelligenceP1 -props.selMatch.intelligenceP2)})</b></li>  }
+                  <li>Intelligence: {props.selMatch.intelligenceP2} <b className='greenText'>(+{Math.abs(props.selMatch.intelligenceP1 -props.selMatch.intelligenceP2)})</b> </li>
+                  : <li> Intelligence: {props.selMatch.intelligenceP2} <b className='redText'>(-{Math.abs(props.selMatch.intelligenceP1 -props.selMatch.intelligenceP2)})</b></li>  }
                 {props.selMatch.strengthP1 < props.selMatch.strengthP2 ?
                   <li>Strength: {props.selMatch.strengthP2} <b className='greenText'>(+{Math.abs(props.selMatch.strengthP1 -props.selMatch.strengthP2)})</b> </li>
                   : <li>Strength: {props.selMatch.strengthP2} <b className='redText'>(-{Math.abs(props.selMatch.strengthP1 -props.selMatch.strengthP2)})</b> </li>}
