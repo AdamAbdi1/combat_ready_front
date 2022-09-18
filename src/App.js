@@ -317,7 +317,7 @@ const App = () => {
   const handleMatchNameChange = (event) => {
     event.preventDefault()
     // setMatchName(event.target.value)
-    setNewMatch({...newMatch, [event.target.name]:event.target.value })
+    setNewMatch({ ...newMatch, [event.target.name]: event.target.value })
   }
 
   return (
@@ -333,7 +333,7 @@ const App = () => {
       <div className="dropdown">
         <button className="dropbtn">Matches</button>
         <div className="dropdown-content">
-          <Matches matches={matches} setShowMatch={setShowMatch} setCompare={setCompare} setSelMatch={setSelMatch} handleDelete={handleDelete}/>
+          <Matches matches={matches} setShowMatch={setShowMatch} setCompare={setCompare} setSelMatch={setSelMatch} handleDelete={handleDelete} />
         </div>
       </div>
       <h1>Search for Combatants</h1>
@@ -341,7 +341,7 @@ const App = () => {
         <input type='text' placeholder='search...' onChange={handleSearchChange} />
         <button onClick={() => getSearch()}>Search</button>
       </form>
-      {showMatch ? <Match selMatch={selMatch} setShowMatch={setShowMatch} handleDelete={handleDelete} handleUpdateMatch={handleUpdateMatch}/> : <></>}
+      {showMatch ? <Match selMatch={selMatch} setShowMatch={setShowMatch} handleDelete={handleDelete} handleUpdateMatch={handleUpdateMatch} /> : <></>}
 
       <button onClick={handleCompare}>compare</button>
       {/* <Add handleCreate={handleCreate} /> */}
@@ -393,7 +393,7 @@ const App = () => {
           </div>
           <div className='flex-child' id='black'>
 
-          <h2>{newMatch.matchName}</h2>
+            <h2>{newMatch.matchName}</h2>
             <input type='text' name="matchName" placeholder='Input Name...' onChange={handleMatchNameChange} required='true' />
             <button onClick={() => handleAddNewMatch()}>Update Name</button>
 
@@ -445,87 +445,84 @@ const App = () => {
               </form>
             </details>
           </div>
-          
-        {showStage ? <>
-          <div className="row">
-          {stage.map((image) => {
-            return (
-              <div key={image.id} className="column">
-                <img className='resize' src={image.nameOfStage}/>
-                <Edit handleUpdate={handleUpdate} image={image} />
-                <button onClick={handleDelete} value={image.id}>
-                  X
-                </button>
-                <Stage handleChangeBackground={handleChangeBackground} image={image} />
-              </div>
-            )
-          })}
-        </div>
-        </>: <p hidden></p>}
-        </>
           :
           <p></p>
-        }
-        <Results results={results} search={search} setPlayer1={setPlayer1} setPlayer2={setPlayer2} />
-        
-        {hide === 'false' ? <p hidden></p> :
-        <div><button onClick={handelPrevious}>Previous</button>
-        <div className='far-right'>
-          <button onClick={handleNext} type='button'>Next</button>
-        </div>
-      </div>
-      <div className="flex-container">
-        {hide === 'false' ? <p hidden></p> : superHero.slice(next1, next).map((superheros) => {
-          return (
-
-            <div key={superheros.id} className="flex-child">
-              <h4>Name: {superheros.name}</h4>
-              <p><b>Real Name: </b>{superheros.biography.fullName}</p>
-              <p><b>Species: </b>{superheros.appearance.race}</p>
-              <img src={superheros.images.sm} />
-              <h4>Stats</h4>
-              <ul>
-                <li>intelligence: {superheros.powerstats.intelligence}</li>
-                <li>Strength: {superheros.powerstats.strength}</li>
-                <li>Speed: {superheros.powerstats.speed}</li>
-                <li>Durability: {superheros.powerstats.durability}</li>
-                <li>Power: {superheros.powerstats.power}</li>
-
-                <button onClick={() => setPlayer1({
-                  name: superheros.name,
-                  realName: superheros.biography.fullName,
-                  species: superheros.appearance.race,
-                  intelligence: Number(superheros.powerstats.intelligence),
-                  strength: Number(superheros.powerstats.strength),
-                  speed: Number(superheros.powerstats.speed),
-                  durability: Number(superheros.powerstats.durability),
-                  power: Number(superheros.powerstats.power),
-                  image: superheros.images.sm
-                })}>Add to player 1</button>
-
-                <button onClick={() => setPlayer2({
-                  name: superheros.name,
-                  realName: superheros.biography.fullName,
-                  species: superheros.appearance.race,
-                  intelligence: Number(superheros.powerstats.intelligence),
-                  strength: Number(superheros.powerstats.strength),
-                  speed: Number(superheros.powerstats.speed),
-                  durability: Number(superheros.powerstats.durability),
-                  power: Number(superheros.powerstats.power),
-                  image: superheros.images.sm
-                })}>Add to player 2</button>
-
-
-              </ul>
+      }
+          {showStage ? <>
+            <div className="row">
+              {stage.map((image) => {
+                return (
+                  <div key={image.id} className="column">
+                    <img className='resize' src={image.nameOfStage} />
+                    <Edit handleUpdate={handleUpdate} image={image} />
+                    <button onClick={handleDelete} value={image.id}>
+                      X
+                    </button>
+                    <Stage handleChangeBackground={handleChangeBackground} image={image} />
+                  </div>
+                )
+              })}
             </div>
-          )
-        })}
+          </> : <p hidden></p>}
+          <Results results={results} search={search} setPlayer1={setPlayer1} setPlayer2={setPlayer2} />
 
-        </div>
+          {hide === 'false' ? <p hidden></p> :
+            <div>
+              <button onClick={handelPrevious}>Previous</button>
+              <div className='far-right'>
+                <button onClick={handleNext} type='button'>Next</button>
+              </div>
+            </div>}
+          <div className="flex-container">
+            {hide === 'false' ? <p hidden></p> : superHero.slice(next1, next).map((superheros) => {
+              return (
+
+                <div key={superheros.id} className="flex-child">
+                  <h4>Name: {superheros.name}</h4>
+                  <p><b>Real Name: </b>{superheros.biography.fullName}</p>
+                  <p><b>Species: </b>{superheros.appearance.race}</p>
+                  <img src={superheros.images.sm} />
+                  <h4>Stats</h4>
+                  <ul>
+                    <li>intelligence: {superheros.powerstats.intelligence}</li>
+                    <li>Strength: {superheros.powerstats.strength}</li>
+                    <li>Speed: {superheros.powerstats.speed}</li>
+                    <li>Durability: {superheros.powerstats.durability}</li>
+                    <li>Power: {superheros.powerstats.power}</li>
+
+                    <button onClick={() => setPlayer1({
+                      name: superheros.name,
+                      realName: superheros.biography.fullName,
+                      species: superheros.appearance.race,
+                      intelligence: Number(superheros.powerstats.intelligence),
+                      strength: Number(superheros.powerstats.strength),
+                      speed: Number(superheros.powerstats.speed),
+                      durability: Number(superheros.powerstats.durability),
+                      power: Number(superheros.powerstats.power),
+                      image: superheros.images.sm
+                    })}>Add to player 1</button>
+
+                    <button onClick={() => setPlayer2({
+                      name: superheros.name,
+                      realName: superheros.biography.fullName,
+                      species: superheros.appearance.race,
+                      intelligence: Number(superheros.powerstats.intelligence),
+                      strength: Number(superheros.powerstats.strength),
+                      speed: Number(superheros.powerstats.speed),
+                      durability: Number(superheros.powerstats.durability),
+                      power: Number(superheros.powerstats.power),
+                      image: superheros.images.sm
+                    })}>Add to player 2</button>
+                  </ul>
+                </div>
+              )
+            })}
+
           </div>
-      </>
-    )
-  }
+
+        </>
+  )
+}
 
 
-  export default App
+      export default App
