@@ -306,6 +306,7 @@ const App = () => {
     })
   }
   const confirmNewMatch = (newMatch) => {
+    console.log(newMatch)
     addMatch(newMatch)
   }
 
@@ -314,8 +315,8 @@ const App = () => {
   //-----------------------------------------------
   const handleMatchNameChange = (event) => {
     event.preventDefault()
-    // setMatchName(event.target.value)
-    setNewMatch({...newMatch, [event.target.name]:event.target.value })
+    setMatchName(event.target.value)
+    // setNewMatch({...newMatch, [event.target.name]:event.target.value })
   }
 
   return (
