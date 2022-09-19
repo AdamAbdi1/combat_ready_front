@@ -185,9 +185,9 @@ const App = () => {
   //-----------------------------------------------
   //  EDIT MATCH
   //-----------------------------------------------
-  const handleUpdateMatch = (event) => {
+  const handleUpdateMatch = (editedMatch) => {
     axios
-      .put('http://localhost:8000/api/matches/' + event.target.value.id, event.target.value)
+      .put('http://localhost:8000/api/matches/' + editedMatch.id, editedMatch)
       .then((response) => {
         getMatches()
       })
