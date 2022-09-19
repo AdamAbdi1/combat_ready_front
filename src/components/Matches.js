@@ -16,7 +16,7 @@ const Matches = (props) => {
         <>
           <div className='matchMenu'>
           <a onClick={() => handleRenderMatch(match)}>{match.matchName}</a>
-          <button onClick={props.handleDelete} value={match.id}>X</button>
+          <button onClick={props.handleDeleteMatch} value={match.id}>X</button>
           </div>
 
         </>

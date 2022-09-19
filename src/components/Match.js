@@ -45,7 +45,7 @@ const Match = (props) => {
     <button onClick={() => handleCloseMatch()}>Close Match</button>
     <button onClick={() => handleCancelEdit()}>Cancel Edit</button>
     <button onClick={() => props.handleUpdateMatch(matchEdit)} value={matchEdit.id}>Update Match</button>
-    <button onClick={props.handleDelete} >Delete Match</button>
+    <button onClick={props.handleDeleteMatch} value={matchEdit.id}>Delete Match</button>
       <form className='mainContainer edit' id='matchEditForm'>
       <label htmlFor='matchName'>Match Name: </label>
       <input type='text' name='matchName' placeHolder={props.selMatch.matchName} onChange={handleUpdateEdit}/>

@@ -182,6 +182,18 @@ const App = () => {
         }))
       })
   }
+
+//-----------------------------------------------
+//  Delete Match
+//-----------------------------------------------
+const handleDeleteMatch = (event) => {
+  axios
+    .delete('http://localhost:8000/api/matches/' + event.target.value)
+    .then((response) => {
+      getMatches()
+    })
+  setShowMatch(false)
+}
   //-----------------------------------------------
   //  EDIT MATCH
   //-----------------------------------------------
@@ -323,8 +335,8 @@ const App = () => {
   //-----------------------------------------------
   const handleMatchNameChange = (event) => {
     event.preventDefault()
-    // setMatchName(event.target.value)
-    setNewMatch({ ...newMatch, [event.target.name]: event.target.value })
+    setMatchName(event.target.value)
+    // setNewMatch({ ...newMatch, [event.target.name]: event.target.value })
   }
 
   return (
@@ -346,7 +358,7 @@ const App = () => {
       <div className="dropdown">
         <button className="dropbtn">Matches</button>
         <div className="dropdown-content">
-          <Matches matches={matches} setShowMatch={setShowMatch} setCompare={setCompare} setSelMatch={setSelMatch} handleDelete={handleDelete} />
+          <Matches matches={matches} setShowMatch={setShowMatch} setCompare={setCompare} setSelMatch={setSelMatch} handleDeleteMatch={handleDeleteMatch} />
         </div>
       </div>
       <button onClick={handleShowStage}>show stages</button>
@@ -355,7 +367,7 @@ const App = () => {
         <input type='text' placeholder='search...' onChange={handleSearchChange} />
         <button onClick={() => getSearch()}>Search</button>
       </form>
-      {showMatch ? <Match selMatch={selMatch} setShowMatch={setShowMatch} handleDelete={handleDelete} handleUpdateMatch={handleUpdateMatch} /> : <></>}
+      {showMatch ? <Match selMatch={selMatch} setShowMatch={setShowMatch} handleDelete={handleDeleteMatch} handleUpdateMatch={handleUpdateMatch} /> : <></>}
 
       <button onClick={handleCompare}>compare</button>
       {/* <Add handleCreate={handleCreate} /> */}
