@@ -60,7 +60,7 @@ const App = () => {
   })
   const [superHero, setSuperHero] = useState([])
   const [hide, setHide] = useState('false')
-  const [search, setSearch] = useState('')
+  const [search, setSearch] = useState([])
   const [results, setResults] = useState([])
   const [matchName, setMatchName] = useState('')
   const [player1, setPlayer1] = useState({})
